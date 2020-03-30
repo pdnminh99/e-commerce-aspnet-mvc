@@ -5,18 +5,18 @@ namespace EcommerceApp2259.Models
 
     public class Product
     {
-        public string name { get; set; }
-        public int price { get; set; }
-        public DateTime createdDate { get; }
-        public string category { get; set; }
-        public string brand { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public DateTime CreatedDate { get; }
+        public string Category { get; set; }
+        public string Brand { get; set; }
         public Product(string name, int price, DateTime createdDate, string category, string brand)
         {
-            this.name = name;
-            this.price = price;
-            this.createdDate = createdDate;
-            this.category = category;
-            this.brand = brand;
+            Name = name;
+            Price = price;
+            CreatedDate = createdDate;
+            Category = category;
+            Brand = brand;
         }
     }
 
