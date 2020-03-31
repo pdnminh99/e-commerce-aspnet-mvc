@@ -1,36 +1,50 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace EcommerceApp2259.Models
 {
 
+    [Table("Product")]
     public class Product
     {
-        public Guid? ProductId { get; }
-        public string Name { get; set; }
-        public int Price { get; set; }
-        public DateTime CreatedDate { get; }
-        public string Category { get; set; }
-        public string Brand { get; set; }
-        public Product(Guid? productId, string name, int price, DateTime createdDate, string category, string brand)
-        {
-            productId ??= Guid.NewGuid();
-            ProductId = productId;
-            Name = name;
-            Price = price;
-            CreatedDate = createdDate;
-            Category = category;
-            Brand = brand;
-        }
+        [Key]
+        public Guid ProductId { get; set; }
 
-        public Product(string name, int price, DateTime createdDate, string category, string brand)
-        {
-            ProductId = Guid.NewGuid();
-            Name = name;
-            Price = price;
-            CreatedDate = createdDate;
-            Category = category;
-            Brand = brand;
-        }
+        [Column("Title")]
+        public string Title { get; set; }
+
+        [Column("Price")]
+        public int Price { get; set; }
+
+        [Column("CreatedDate")]
+        public DateTime CreatedDate { get; }
+
+        [Column("Category")]
+        public int Category { get; set; }
+
+        [Column("Brand")]
+        public int Brand { get; set; }
+        // public Product(Guid? productId, string title, int price, DateTime createdDate, string category, string brand)
+        // {
+        //     productId ??= Guid.NewGuid();
+        //     ProductId = productId;
+        //     Title = title;
+        //     Price = price;
+        //     CreatedDate = createdDate;
+        //     Category = category;
+        //     Brand = brand;
+        // }
+
+        // public Product(string title, int price, DateTime createdDate, string category, string brand)
+        // {
+        //     ProductId = Guid.NewGuid();
+        //     Title = title;
+        //     Price = price;
+        //     CreatedDate = createdDate;
+        //     Category = category;
+        //     Brand = brand;
+        // }
     }
 
 }

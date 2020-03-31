@@ -1,6 +1,7 @@
 ###################
 # compiled source #
 ###################
+.vs
 .vscode
 *.com
 *.class

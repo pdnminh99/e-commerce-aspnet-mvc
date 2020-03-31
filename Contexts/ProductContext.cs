@@ -1,25 +1,21 @@
-// using Microsoft.EntityFrameworkCore;
-// using EcommerceApp2259.Models;
-// using System.Collections.Generic;
-// using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using EcommerceApp2259.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-// namespace EcommerceApp2259.Context
-// {
-//     public class ProductContext : DbContext
-//     {
-//         DbSet<Product> products;
+namespace EcommerceApp2259.Context
+{
+    public class ProductContext : DbContext
+    {
+        private DbSet<Product> products { get; set; }
 
-//         public ProductContext(DbContextOptions<ProductContext> options)
-//             : base(options)
-//         {
-//         }
+        public ProductContext(DbContextOptions<ProductContext> options)
+            : base(options)
+        {
+        }
 
-//         public async Task<List<Product>> getAll() {
-//             return await products.ToListAsync();
-//         }
+        public Task<List<Product>> getAll() => products.ToListAsync();
 
-//         public async Task<Product> getFirst() {
-//             return await products.FirstOrDefaultAsync(p => true);
-//         }
-//     }
-// }
+        public async Task<Product> getFirst() => await products.FirstOrDefaultAsync(p => true);
+    }
+}

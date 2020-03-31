@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EcommerceApp2259.Models.Product>;
+﻿@model List<EcommerceApp2259.Models.Product>;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -8,7 +8,11 @@
     <ul>
         @foreach (var product in Model) {
             <li>
-                <a asp-action="ProductDetail" asp-route-productId="@product.ProductId">@Html.DisplayFor(m => product.Name): @product.Name</a>
+                <p>@product.Title</p>
+                <p>@product.ProductId</p>
+                <p>@product.Brand</p>
+                <p>@product.Category</p>
+                <p>@product.CreatedDate</p>
             </li>
             }
     </ul>
