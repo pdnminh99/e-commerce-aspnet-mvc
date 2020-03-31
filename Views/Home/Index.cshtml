@@ -7,7 +7,9 @@
 <div class="text-center">
     <ul>
         @foreach (var product in Model) {
-            <li>@Html.DisplayNameFor(modelItem => product.Name): @product.Name</li>
+            <li>
+                <a asp-action="ProductDetail" asp-route-productId="@product.ProductId">@Html.DisplayFor(m => product.Name): @product.Name</a>
+            </li>
             }
     </ul>
 </div>

@@ -11,24 +11,35 @@ namespace EcommerceApp2259.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         // private readonly ProductContext _context;
+        private List<Product> products = new List<Product>();
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
             // _context = ctx;
+            products.Add(new Product(name: "iPhone X", price: 1000, createdDate: DateTime.Now, "smartphone", brand: "Apple"));
+            products.Add(new Product("iPhone 7", 1000, DateTime.Now, "smartphone", "Apple"));
+            products.Add(new Product("iPhone 8", 1000, DateTime.Now, "smartphone", "Apple"));
         }
 
         public IActionResult Index()
         {
-            List<Product> products = new List<Product>();
-            products.Add(new Product("iPhone X", 1000, DateTime.Now, "smartphone", "Apple"));
-            products.Add(new Product("iPhone X", 1000, DateTime.Now, "smartphone", "Apple"));
-            products.Add(new Product("iPhone X", 1000, DateTime.Now, "smartphone", "Apple"));
-            // if (displayProduct == null)
-            // {
-            //     return NotFound();
-            // }
             return View(products);
+        }
+
+        public IActionResult ProductDetail(string productId)
+        {
+            Console.WriteLine(productId);
+            Guid uuid = Guid.Parse(productId);
+            foreach (var p in products)
+            {
+                Console.WriteLine($"{uuid} compare to {p.ProductId}. Result {uuid == p.ProductId}");
+                if (uuid == p.ProductId)
+                {
+                    return View(p);
+                }
+            }
+            return NotFound();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
