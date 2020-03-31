@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EcommerceApp2259.Models
 {
-
     [Table("Product")]
     public class Product
     {
@@ -13,6 +12,9 @@ namespace EcommerceApp2259.Models
 
         [Column("Title")]
         public string Title { get; set; }
+
+        [Column("Owner")]
+        public Guid OwnerId { get; set; }
 
         [Column("Price")]
         public int Price { get; set; }
@@ -25,26 +27,6 @@ namespace EcommerceApp2259.Models
 
         [Column("Brand")]
         public int Brand { get; set; }
-        // public Product(Guid? productId, string title, int price, DateTime createdDate, string category, string brand)
-        // {
-        //     productId ??= Guid.NewGuid();
-        //     ProductId = productId;
-        //     Title = title;
-        //     Price = price;
-        //     CreatedDate = createdDate;
-        //     Category = category;
-        //     Brand = brand;
-        // }
-
-        // public Product(string title, int price, DateTime createdDate, string category, string brand)
-        // {
-        //     ProductId = Guid.NewGuid();
-        //     Title = title;
-        //     Price = price;
-        //     CreatedDate = createdDate;
-        //     Category = category;
-        //     Brand = brand;
-        // }
     }
 
 }

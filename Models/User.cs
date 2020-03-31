@@ -1,26 +1,31 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EcommerceApp2259.Models
 {
 
+    [Table("User")]
     public class User
     {
-        public Guid? UUID { get; }
+        [Key]
+        public Guid UserId { get; set; }
 
         [Display(Name = "Full name")]
         public string Name { get; set; }
+
+        [ForeignKey("UserType")]
         public UserType Type { get; set; }
+
+        [Column("Phone")]
         public string Phone { get; set; }
+
+        [Column("Email")]
         public string Email { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime CreatedDate { get; }
-        public User(Guid? uuid, string name, UserType type, string phone, string email, DateTime? createdDate)
-        {
-            UUID = uuid;
-            CreatedDate = createdDate ?? DateTime.Now;
-        }
+        [Column("CreatedDate")]
+        public DateTime CreatedDate { get; set; }
     }
 
 }
