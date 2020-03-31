@@ -3,7 +3,7 @@ namespace EcommerceApp2259.Models
 
     public enum UserType
     {
-        ADMIN, CUSTOMER
+        ADMIN, CUSTOMER, UNKNOWN
     }
 
     public enum OrderStatus

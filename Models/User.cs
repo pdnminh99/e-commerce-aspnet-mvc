@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EcommerceApp2259.Models
 {
-
     [Table("User")]
     public class User
     {
@@ -14,17 +13,28 @@ namespace EcommerceApp2259.Models
         [Display(Name = "Full name")]
         public string Name { get; set; }
 
-        [ForeignKey("UserType")]
+        [Column("UserType")]
+        private string _Type
+        {
+            set
+            {
+                Type = value switch
+                {
+                    "customer" => UserType.CUSTOMER,
+                    "admin" => UserType.ADMIN,
+                    _ => UserType.UNKNOWN
+                };
+            }
+        }
+
+        [NotMapped]
         public UserType Type { get; set; }
 
-        [Column("Phone")]
         public string Phone { get; set; }
 
-        [Column("Email")]
         public string Email { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Column("CreatedDate")]
         public DateTime CreatedDate { get; set; }
     }
 

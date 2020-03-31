@@ -10,23 +10,18 @@ namespace EcommerceApp2259.Models
         [Key]
         public Guid ProductId { get; set; }
 
-        [Column("Title")]
         public string Title { get; set; }
 
-        [Column("Owner")]
-        public Guid OwnerId { get; set; }
+        public Guid Owner { get; set; }
 
-        [Column("Price")]
         public int Price { get; set; }
 
-        [Column("CreatedDate")]
+        [DataType(DataType.DateTime)]
         public DateTime CreatedDate { get; }
 
-        [Column("Category")]
-        public int Category { get; set; }
+        public string Category { get; set; }
 
-        [Column("Brand")]
-        public int Brand { get; set; }
+        public string Brand { get; set; }
     }
 
 }

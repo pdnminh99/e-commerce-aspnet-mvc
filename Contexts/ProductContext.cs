@@ -9,6 +9,8 @@ namespace EcommerceApp2259.Context
     {
         private DbSet<Product> products { get; set; }
 
+        private DbSet<User> users { get; set; }
+
         public ProductContext(DbContextOptions<ProductContext> options)
             : base(options)
         {
