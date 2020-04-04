@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EcommerceApp2259.Context;
+using EcommerceApp2259.Models;
+using EcommerceApp2259.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceApp2259
@@ -17,11 +19,12 @@ namespace EcommerceApp2259
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IProductContext, FakeProductContext>();
+            services.AddSingleton<IProductServiceOperations, ProductService>();
             services.AddControllersWithViews();
-            services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("E-CommerceContext")));
+            // services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("E-CommerceContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +48,7 @@ namespace EcommerceApp2259
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{keyword?}");
             });
         }
     }
