@@ -23,7 +23,6 @@ namespace EcommerceApp2259.Context
             return productToAdd;
         }
 
-
 #nullable enable
         public Product? Delete(Guid itemId)
         {

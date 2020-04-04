@@ -12,6 +12,8 @@ namespace EcommerceApp2259.Models
 
         public string Title { get; set; }
 
+        public string Images { get; set; }
+
         public Guid? Owner { get; set; }
 
         public int Price { get; set; }
@@ -23,7 +25,9 @@ namespace EcommerceApp2259.Models
 
         public string Brand { get; set; }
 
-        public Product(Guid productId, string title, Guid? owner, int price, DateTime createdDate, string category, string brand)
+        public int Stock { get; set; }
+
+        public Product(Guid productId, string title, Guid? owner, int price, DateTime createdDate, string category, string brand, int? stock, string images)
         {
             ProductId = productId;
             Title = title;
@@ -32,6 +36,8 @@ namespace EcommerceApp2259.Models
             CreatedDate = createdDate;
             Category = category;
             Brand = brand;
+            Images = images;
+            Stock = stock ?? 100;
         }
 
         public int CompareTo(Product other)

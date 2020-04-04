@@ -2,18 +2,12 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    ViewData["ItemsPerRow"] ??= 3;
 }
 
 <div class="text-center">
-    <ul>
-        @foreach (var product in Model) {
-            <li>
-                <p>@product.Title</p>
-                <p>@product.ProductId</p>
-                <p>@product.Brand</p>
-                <p>@product.Category</p>
-                <p>@product.CreatedDate</p>
-            </li>
-            }
-    </ul>
+    <h1>Items count: @Model.Count</h1>
+    <div class="container">
+        @await Html.PartialAsync("Components/ProductsShowcase", Model)
+    </div>
 </div>

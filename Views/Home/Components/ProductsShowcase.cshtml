@@ -1,0 +1,47 @@
+@model List<EcommerceApp2259.Models.Product>;
+
+@{
+    var size = Model.Count;
+    var index = 0;
+    var maxItemsPerRow = (int) ViewData["ItemsPerRow"];
+
+    while (index < size)
+    {
+        <h1>Max ItemsPerRow: @maxItemsPerRow</h1>
+        <div class="row">
+            @{
+                for (int col = 0; col < maxItemsPerRow && index < size; col++) 
+                {
+                    <div class="card product-card">
+                        <img src="@Model[index].Images" class="card-img-top" style="max-height: 300px;" alt="...">
+                        <div class="card-body">
+                            <p class="product-title"><strong>@Model[index].Title</strong></p>
+                            <p class="product-text">@Model[index].Price&nbsp;₫</p>
+                        </div>
+                    </div>
+                    index++;
+                }
+            }
+        </div>
+    }
+
+}
+
+<style>
+    .product-card {
+        width: 200px; 
+        margin: 0 3px;
+    }
+
+    .product-title {
+        font-size: 12px; 
+        font-family: sans-serif; 
+        font-style: bolder;
+    }
+
+    .product-text {
+        font-size: 14px; 
+        color: red; 
+        font-family: sans-serif;
+    }
+</style>
