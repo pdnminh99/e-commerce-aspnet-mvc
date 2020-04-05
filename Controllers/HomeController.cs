@@ -25,12 +25,14 @@ namespace EcommerceApp2259.Controllers
             var products = keyword == null ? _productCtx.Get() : _productCtx.Get(keyword);
 
             Console.WriteLine($"There are {products.Count}");
-            ViewData["ItemsPerRow"] = 4;
+            ViewData["ItemsPerRow"] = 5;
             return View(products);
         }
 
         public IActionResult ProductDetail(Guid productId)
         {
+            Console.WriteLine($"ProductId is {productId}");
+            if (productId == null) return NotFound();
             var product = _productCtx.Get(productId);
             if (product == null) return NotFound();
             return View(product);

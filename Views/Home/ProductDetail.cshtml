@@ -3,3 +3,37 @@
 @{
     ViewData["Title"] = "Privacy Policy";
 }
+
+<div class="container">
+  <div class="row" style="padding: 5px 0;">
+    <a asp-action="Index">Trở về trang chủ</a>
+  </div>
+  <div class="row">
+    <div class="col-7" style="padding: 0;">
+        @{
+            if (Model.Images != null && Model.Images.Count > 0)
+            {
+                await Html.PartialAsync("Components/ImagesCarouselDisplay.cshtml", Model.Images);
+            }
+            else
+            {
+                <img src="https://worldie.com/assets/images/art_no_image.png" />
+            }
+        }
+    </div>
+    <div class="col-5" style="padding: 0 5px;">
+        <div class="card" style="padding: 20px 20px;">
+            <h3 class="card-title" style="padding: 0;">@Model.Title</h3>
+            <div class="card-body" style="padding: 0;">
+                <p class="card-text">@Html.DisplayNameFor(p => p.Category): @Model.Category</p>
+                <p class="card-text">@Html.DisplayNameFor(p => p.Brand): @Model.Brand</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card">
+
+        </div>
+    </div>
+  </div>
+</div>

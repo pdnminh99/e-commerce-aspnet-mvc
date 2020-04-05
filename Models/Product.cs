@@ -10,24 +10,27 @@ namespace EcommerceApp2259.Models
     {
         public Guid ProductId { get; set; }
 
+        [Display(Name = "Tên sản phẩm")]
         public string Title { get; set; }
 
         [Column("ProductImage")]
-        public IEnumerable<ProductImage> Images { get; set; }
+        public List<ProductImage> Images { get; set; }
 
         [Column("ProductDetail")]
         public List<ProductDetail> Details { get; set; }
 
         public Guid? Owner { get; set; }
 
-        [Column("Price")]
+        [Column("Price"), Display(Name = "Giá")]
         public int OriginalPrice { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime CreatedDate { get; }
 
+        [Display(Name = "Mục sản phẩm")]
         public string Category { get; set; }
 
+        [Display(Name = "Thương hiệu")]
         public string Brand { get; set; }
 
         public int CompareTo(Product other) => OriginalPrice.CompareTo(other.OriginalPrice);

@@ -15,13 +15,25 @@
                 {
                     <div class="card product-card">
                         <div style="width: 100%; height: 150px;">
-                            <img src="@Model[index].Images" class="card-img-top product-image" />
+                            @{
+                                if (Model[index].Images != null && Model[index].Images.Count > 0)
+                                {
+                                    <img src="@Model[index].Images[0]" class="card-img-top product-image" />
+                                }
+                                else 
+                                {
+                                    <img src="https://worldie.com/assets/images/art_no_image.png" class="card-img-top product-image" />
+                                }
+                            }
                         </div>
                         <div class="card-body product-card-body">
                             <p class="product-title">
-                                <strong>@Model[index].Title</strong>
+                                <strong>
+                                    <a asp-action="ProductDetail" asp-route-productId="@Model[index].ProductId">@Model[index].Title</a>
+                                </strong>
                             </p>
                             <p class="product-text">@Model[index].OriginalPrice&nbsp;₫</p>
+                            <p class="product-text">@Model[index].ProductId&nbsp;₫</p>
                         </div>
                     </div>
                     index++;
@@ -35,6 +47,7 @@
     .product-card {
         width: 150px;
         margin: 0 2px;
+        margin-bottom: 4px;
         border-radius: 5px;
     }
 

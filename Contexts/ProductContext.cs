@@ -34,7 +34,7 @@ namespace EcommerceApp2259.Context
 
         public Product Get(Guid uuid)
         {
-            return _ctx.Product.Where(p => p.ProductId.Equals(uuid)).FirstOrDefault(null);
+            return _ctx.Product.Where(p => p.ProductId == uuid).First();
         }
 
         public List<Product> Get()
