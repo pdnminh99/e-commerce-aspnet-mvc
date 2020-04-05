@@ -6,5 +6,13 @@
 }
 
 <div class="container">
-    @await Html.PartialAsync("Components/ProductsFilter")
+    <div class="row">
+        <div class="col-4">
+            @await Html.PartialAsync("Components/ProductsFilter")
+        </div>
+        <div class="col-8">
+            @await Html.PartialAsync("Components/ProductsShowcase", Model)
+        </div>
+    </div>
+    
 </div>

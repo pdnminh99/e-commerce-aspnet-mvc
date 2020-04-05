@@ -21,10 +21,10 @@ namespace EcommerceApp2259
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IProductContext, FakeProductContext>();
-            services.AddSingleton<IProductServiceOperations, ProductService>();
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("E-CommerceContext")));
+            services.AddScoped<IProductContext, ProductContext>();
+            services.AddScoped<IProductServiceOperations, ProductService>();
             services.AddControllersWithViews();
-            // services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("E-CommerceContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

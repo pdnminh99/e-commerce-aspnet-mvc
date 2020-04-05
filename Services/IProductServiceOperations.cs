@@ -17,8 +17,8 @@ namespace EcommerceApp2259.Services
 #nullable enable
         public Product? Get(Guid productId);
 
-        public IEnumerable<Product> Get();
+        public List<Product> Get();
 
-        public IEnumerable<Product> Get(string keyword);
+        public List<Product> Get(string keyword);
     }
 }

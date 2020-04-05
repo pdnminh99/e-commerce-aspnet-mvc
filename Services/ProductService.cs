@@ -38,9 +38,9 @@ namespace EcommerceApp2259.Services
             return _productCtx.Get(productId);
         }
 
-        public IEnumerable<Product> Get() => _productCtx.Get();
+        public List<Product> Get() => _productCtx.Get();
 
-        public IEnumerable<Product> Get(String keyword)
+        public List<Product> Get(String keyword)
         {
             return _productCtx.Get(keyword);
         }

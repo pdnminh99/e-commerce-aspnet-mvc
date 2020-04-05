@@ -1,23 +1,50 @@
-using Microsoft.EntityFrameworkCore;
 using EcommerceApp2259.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace EcommerceApp2259.Context
 {
-    public class ProductContext : DbContext
+    public class ProductContext : IProductContext
     {
-        private DbSet<Product> products { get; set; }
+        private readonly ApplicationContext _ctx;
 
-        private DbSet<User> users { get; set; }
-
-        public ProductContext(DbContextOptions<ProductContext> options)
-            : base(options)
+        public ProductContext(ApplicationContext ctx)
         {
+            _ctx = ctx;
+        }
+        public Product Add(Product item)
+        {
+            _ctx.Product.Add(item);
+            return item;
         }
 
-        public Task<List<Product>> getAll() => products.ToListAsync();
+        public Product Delete(Guid itemId)
+        {
+            var productToDelete = Get(itemId);
+            if (productToDelete != null) _ctx.Product.Remove(productToDelete);
+            return productToDelete;
+        }
 
-        public async Task<Product> getFirst() => await products.FirstOrDefaultAsync(p => true);
+        public Product Edit(Product replicant, bool autoInsertIfNotExist = false)
+        {
+            return replicant;
+        }
+
+        public Product Get(Guid uuid)
+        {
+            return _ctx.Product.Where(p => p.ProductId.Equals(uuid)).FirstOrDefault(null);
+        }
+
+        public List<Product> Get()
+        {
+            return _ctx.Product.ToList();
+        }
+
+        public List<Product> Get(string keyword)
+        {
+            return _ctx.Product.Where(p => p.Brand.Contains(keyword) || p.Category.Contains(keyword) || p.Title.Contains(keyword)).ToList();
+        }
     }
 }

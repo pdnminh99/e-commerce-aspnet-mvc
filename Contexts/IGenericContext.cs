@@ -13,8 +13,8 @@ namespace EcommerceApp2259.Context
 
         public T Get(Guid uuid);
 
-        public IEnumerable<T> Get();
+        public List<T> Get();
 
-        public IEnumerable<T> Get(String keyword);
+        public List<T> Get(string keyword);
     }
 }
