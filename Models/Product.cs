@@ -13,11 +13,9 @@ namespace EcommerceApp2259.Models
         [Display(Name = "Tên sản phẩm")]
         public string Title { get; set; }
 
-        [Column("ProductImage")]
-        public List<ProductImage> Images { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; }
 
-        [Column("ProductDetail")]
-        public List<ProductDetail> Details { get; set; }
+        public ICollection<ProductDetail> Details { get; set; }
 
         public Guid? Owner { get; set; }
 

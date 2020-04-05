@@ -31,7 +31,6 @@ namespace EcommerceApp2259.Controllers
 
         public IActionResult ProductDetail(Guid productId)
         {
-            Console.WriteLine($"ProductId is {productId}");
             if (productId == null) return NotFound();
             var product = _productCtx.Get(productId);
             if (product == null) return NotFound();

@@ -16,9 +16,9 @@
                     <div class="card product-card">
                         <div style="width: 100%; height: 150px;">
                             @{
-                                if (Model[index].Images != null && Model[index].Images.Count > 0)
+                                if (Model[index].ProductImages != null && Model[index].ProductImages.Count > 0)
                                 {
-                                    <img src="@Model[index].Images[0]" class="card-img-top product-image" />
+                                    <img src="@Model[index].ProductImages.First().URI" class="card-img-top product-image" />
                                 }
                                 else 
                                 {
@@ -33,7 +33,7 @@
                                 </strong>
                             </p>
                             <p class="product-text">@Model[index].OriginalPrice&nbsp;₫</p>
-                            <p class="product-text">@Model[index].ProductId&nbsp;₫</p>
+                            <p class="product-text">@Model[index].ProductImages?.Count</p>
                         </div>
                     </div>
                     index++;

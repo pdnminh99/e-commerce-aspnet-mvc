@@ -1,3 +1,35 @@
 ﻿@{
     Layout = "_Layout";
 }
+
+<script>
+    const cartInfo = document.getElementById("cart")
+
+    const cart = (function() {
+        let cartString = localStorage.getItem("cart")
+        if (cartString == null) {
+            localStorage.setItem("cart", "[]")
+            return []
+        }
+        return JSON.parse(cartString)
+    })()
+
+    refreshCart()
+
+    function addToCart({ productId, title, brand, category, count, price }) {
+        cart.push({ productId, title, brand, category, count, price })
+        localStorage.setItem("cart", JSON.stringify(cart))
+        refreshCart()
+    }
+
+    function refreshCart() {
+        itemsCount = cart.length
+        if (itemsCount === 0) {
+            cartInfo.innerText = "0 item in cart"
+        } else if (itemsCount === 1) {
+            cartInfo.innerText = "1 item in cart"
+        } else {
+            cartInfo.innerText = `${itemsCount} items in cart`
+        }
+    }
+</script>

@@ -11,9 +11,9 @@
   <div class="row">
     <div class="col-7" style="padding: 0;">
         @{
-            if (Model.Images != null && Model.Images.Count > 0)
+            if (Model.ProductImages != null && Model.ProductImages.Count > 0)
             {
-                await Html.PartialAsync("Components/ImagesCarouselDisplay.cshtml", Model.Images);
+                await Html.PartialAsync("Components/ImagesCarouselDisplay.cshtml", Model.ProductImages);
             }
             else
             {
@@ -26,7 +26,11 @@
             <h3 class="card-title" style="padding: 0;">@Model.Title</h3>
             <div class="card-body" style="padding: 0;">
                 <p class="card-text">@Html.DisplayNameFor(p => p.Category): @Model.Category</p>
+                <hr />
                 <p class="card-text">@Html.DisplayNameFor(p => p.Brand): @Model.Brand</p>
+                <hr />
+                <p class="card-text text-center">@Model.OriginalPrice&nbsp;VND</span></p>
+                <button onclick="addToCart('@Model.ProductId', '@Model.Title', '@Model.Brand', '@Model.Category', 1, @Model.OriginalPrice)" type="button" class="btn btn-primary" style="width: 100%;">Thêm vào giỏ hàng</button>
             </div>
         </div>
     </div>
