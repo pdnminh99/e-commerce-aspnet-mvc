@@ -5,9 +5,6 @@
     ViewData["ItemsPerRow"] ??= 3;
 }
 
-<div class="text-center">
-    <h1>Items count: @Model.Count</h1>
-    <div class="container">
-        @await Html.PartialAsync("Components/ProductsShowcase", Model)
-    </div>
+<div class="container">
+    @await Html.PartialAsync("Components/ProductsFilter")
 </div>

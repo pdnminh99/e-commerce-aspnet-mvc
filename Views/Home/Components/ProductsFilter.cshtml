@@ -1,0 +1,112 @@
+@{
+    var currentBrand = ViewData["Brand"] ?? "all";
+    var category = ViewData["Category"] ?? "phone";
+    var priceMax = ViewData["PriceMax"];
+    var priceMin = ViewData["PriceMin"];
+}
+
+<div id="filter" class="card" style="width: 300px; border-radius: 10px; padding: 10px; max-height: 500px; overflow-y: auto;">
+    <form class="card-body">
+
+        <span class="input-group" style="padding: 0; margin: 0;">
+            <input id="search-txt" type="text" class="form-control" placeholder="Nhập từ khoá">
+            <div class="input-group-append">
+                <button class="btn btn-primary custom-search-btn" type="button" id="search-btn">Tìm kiếm</button>
+            </div>
+        </span>
+
+        <hr />
+        <h5 class="card-title">Lọc sản phẩm</h5>
+
+        <label for="brand">Sắp xếp</label>
+        <select id="brand" class="custom-select" style="font-size: 12px; margin: 0px 0px; padding: 3px 5px;">
+            <option selected>Theo ngày</option>
+            <option>Theo giá tăng dần</option>
+            <option>Theo giá giảm dần</option>
+            <option>Từ A-Z</option>
+            <option>Từ Z-A</option>
+        </select>
+
+        <label for="brand">Thương hiệu</label>
+        <select id="brand" class="custom-select" style="font-size: 12px; margin: 0px 0px; padding: 3px 5px;">
+            <option selected>Tất cả</option>
+            <option>Apple</option>
+            <option>Samsung</option>
+            <option>Oppo</option>
+        </select>
+        <label for="category">Loại sản phẩm</label>
+        <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action active custom-list-group-item">Điện thoại</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">Máy tính bảng</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">Đồng hồ</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">Âm thanh</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">Phụ kiện</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">Laptop</button>
+        </div>
+        <label for="price-cap">Giá thành</label>
+        <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item active">< 1 triệu</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">1 triệu - 2 triệu</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">2 triệu - 5 triệu</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">5 triệu - 10 triệu</button>
+            <button type="button" class="list-group-item list-group-item-action custom-list-group-item">> 10 triệu</button>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 8px; font-size: 12px; font-weight: bold">Áp dụng</button>
+    </form>
+</div>
+
+<style>
+    label {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 8px;
+        margin-bottom: 5px
+    }
+
+    #search-txt {
+        font-size: 12px;
+        padding: 3px 5px;
+        margin: 0;
+    }
+
+    #search-btn {
+        font-size: 12px;
+        padding: 3px 5px;
+    }
+
+    #search-txt::placeholder {
+        font-size: 12px;
+    }
+
+    .custom-list-group-item {
+        font-size: 12px;
+        padding: 5px;
+        padding-left: 10px;
+    }
+
+    /**  STYLE 11 */
+    #filter::-webkit-scrollbar {
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+    #filter::-webkit-scrollbar-track {
+        border-radius: 10px;
+  background: rgba(0,0,0,0.1);
+  border: 1px solid #ccc;
+}
+
+#filter::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(left, #fff, #e4e4e4);
+  border: 1px solid #aaa;
+}
+
+#filter::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+}
+
+#filter::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(left, #22ADD4, #1E98BA);
+}
+</style>
