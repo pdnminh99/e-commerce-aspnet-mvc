@@ -1,0 +1,25 @@
+<div class="right_content">
+        <div class="shopping_cart">
+            <div class="cart_title">Shopping cart</div>
+            <div class="cart_details">3 items <br />
+                <span class="border_cart"></span>Total: <span class="price">350$</span> </div>
+            <div class="cart_icon">
+                <a href="#" title="header=[Checkout] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/images/shoppingcart.png" width="48" height="48" />
+                </a>
+            </div>
+        </div>
+        @* <div class="title_box">What�s new</div>
+        <div class="border_box">
+          <div class="product_title"><a href="~/details.html">Motorola 156 MX-VL</a></div>
+          <div class="product_img"><a href="~/details.html"><img src="~/css/images/p2.gif"   /></a></div>
+          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+        </div> *@
+        @await Html.PartialAsync("Components/ManufacturersDisplay")
+        <div class="banner_adds"> 
+            <a href="#">
+                <img src="~/css/images/bann1.jpg" >
+            </a> 
+        </div>
+    </div>
+    <!-- end of right content -->

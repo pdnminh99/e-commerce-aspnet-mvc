@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using EcommerceApp2259.Models;
 using System;
 using EcommerceApp2259.Services;
-using EcommerceApp2259.Context;
 
 namespace EcommerceApp2259.Controllers
 {
