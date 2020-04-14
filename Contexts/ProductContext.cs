@@ -34,11 +34,13 @@ namespace EcommerceApp2259.Context
 
         public Product Get(Guid uuid)
         {
-            return _ctx.Product.Where(p => p.ProductId == uuid).First();
+            return _ctx.Product.First(p => p.ProductId == uuid);
         }
 
         public List<Product> Get()
         {
+            var images = _ctx.ProductImage.ToList();
+            Console.WriteLine(images.Count);
             return _ctx.Product.ToList();
         }
 

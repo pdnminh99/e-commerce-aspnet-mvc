@@ -1,47 +1,9 @@
 ﻿@using Newtonsoft.Json
 @model EcommerceApp2259.Models.Product;
 
-@* @{
-    ViewData["Title"] = "Privacy Policy";
+@{
+    var similarProducts = ViewData["SimilarProducts"] as List<EcommerceApp2259.Models.Product>;
 }
-
-<div class="container">
-  <div class="row" style="padding: 5px 0;">
-    <a asp-action="Index">Trở về trang chủ</a>
-  </div>
-  <div class="row">
-    <div class="col-7" style="padding: 0;">
-        @{
-            if (Model.ProductImages != null && Model.ProductImages.Count > 0)
-            {
-                await Html.PartialAsync("Components/ImagesCarouselDisplay.cshtml", Model.ProductImages);
-            }
-            else
-            {
-                <img src="https://worldie.com/assets/imagesart_no_image.png" />
-            }
-        }
-    </div>
-    <div class="col-5" style="padding: 0 5px;">
-        <div class="card" style="padding: 20px 20px;">
-            <h3 class="card-title" style="padding: 0;">@Model.Title</h3>
-            <div class="card-body" style="padding: 0;">
-                <p class="card-text">@Html.DisplayNameFor(p => p.Category): @Model.Category</p>
-                <hr />
-                <p class="card-text">@Html.DisplayNameFor(p => p.Brand): @Model.Brand</p>
-                <hr />
-                <p class="card-text text-center">@Model.OriginalPrice&nbsp;VND</span></p>
-                <button onclick="addToCart('@Model.ProductId', '@Model.Title', '@Model.Brand', '@Model.Category', 1, @Model.OriginalPrice)" type="button" class="btn btn-primary" style="width: 100%;">Thêm vào giỏ hàng</button>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="card">
-
-        </div>
-    </div>
-  </div>
-</div> *@
 
 <div id="main_container">
     @await Html.PartialAsync("Components/NavigationBar")
@@ -55,24 +17,23 @@
             <div class="top_prod_box_big"></div>
             <div class="center_prod_box_big">
                 <div class="product_img_big">
-                    <a href="javascript:popImage('~/css/imagesbig_pic.jpg','Some Title')"
-                       title="header=[Zoom] body=[&nbsp;] fade=[on]">
-                        <img src="~/css/images/laptop.gif"/>
-                    </a>
-                    <div class="thumbs">
-                        <a href="#"
-                           title="header=[Thumb1] body=[&nbsp;] fade=[on]">
-                            <img src="~/css/images/thumb1.gif"/>
-                        </a>
-                        <a href="#"
-                           title="header=[Thumb2] body=[&nbsp;] fade=[on]">
-                            <img src="~/css/images/thumb1.gif"/>
-                        </a>
-                        <a href="#"
-                           title="header=[Thumb3] body=[&nbsp;] fade=[on]">
-                            <img src="~/css/images/thumb1.gif"/>
-                        </a>
-                    </div>
+                    @* <a href="javascript:popImage('~/css/imagesbig_pic.jpg','Some Title')" *@
+                    @*    title="header=[Zoom] body=[&nbsp;] fade=[on]"> *@
+                    @*     <img src="~/css/images/laptop.gif"/> *@
+                    @if (Model.ProductImage != null && Model.ProductImage.Count > 0)
+                    {
+                        <img id="big-thumbnail" src="@Model.ProductImage[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
+                        <div class="thumbs">
+                            @for (int i = 1; i < Model.ProductImage.Count; i++)
+                            {
+                                <img id="small-thumb-@i"
+                                     src="@Model.ProductImage[i].URI"
+                                     alt=""
+                                     style="max-height: 30px; max-width: 30px"
+                                     onclick="swapThumbnail(@i)"/>
+                            }
+                        </div>
+                    }
                 </div>
                 <div class="details_big_box">
                     <div class="product_title_big">@Model.Title</div>
@@ -95,107 +56,28 @@
             </div>
             <div class="bottom_prod_box_big"></div>
         </div>
-        <div class="center_title_bar">Similar products</div>
-        <div class="prod_box">
-            <div class="top_prod_box"></div>
-            <div class="center_prod_box">
-                <div class="product_title">
-                    <a href="#">Motorola 156 MX-VL</a>
-                </div>
-                <div class="product_img">
-                    <a href="#">
-                        <img src="~/css/images/laptop.gif"/>
-                    </a>
-                </div>
-                <div class="prod_price">
-                    <span class="reduce">350$</span> <span class="price">270$</span>
-                </div>
-            </div>
-            <div class="bottom_prod_box"></div>
-            <div class="prod_details_tab">
-                <a href="#"
-                   title="header=[Add to cart] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/cart.gif" class="left_bt"/>
-                </a>
-                <a
-                    href="#"
-                    title="header=[Specials] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/favs.gif" class="left_bt"/>
-                </a>
-                <a href="#"
-                   title="header=[Gifts] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/favorites.gif" class="left_bt"/>
-                </a>
-                <a href="#" class="prod_details">details</a>
-            </div>
-        </div>
-        <div class="prod_box">
-            <div class="top_prod_box"></div>
-            <div class="center_prod_box">
-                <div class="product_title">
-                    <a href="details.html">Iphone Apple</a>
-                </div>
-                <div class="product_img">
-                    <a href="details.html">
-                        <img src="~/css/images/p4.gif"/>
-                    </a>
-                </div>
-                <div class="prod_price">
-                    <span class="price">270$</span>
-                </div>
-            </div>
-            <div class="bottom_prod_box"></div>
-            <div class="prod_details_tab">
-                <a href="#"
-                   title="header=[Add to cart] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/cart.gif" class="left_bt"/>
-                </a>
-                <a
-                    href="#"
-                    title="header=[Specials] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/favs.gif" class="left_bt"/>
-                </a>
-                <a href="#"
-                   title="header=[Gifts] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/favorites.gif" class="left_bt"/>
-                </a>
-                <a href="details.html" class="prod_details">details</a>
-            </div>
-        </div>
-        <div class="prod_box">
-            <div class="top_prod_box"></div>
-            <div class="center_prod_box">
-                <div class="product_title">
-                    <a href="details.html">Samsung Webcam</a>
-                </div>
-                <div class="product_img">
-                    <a href="details.html">
-                        <img src="~/css/images/p5.gif"/>
-                    </a>
-                </div>
-                <div class="prod_price">
-                    <span class="reduce">350$</span> <span class="price">270$</span>
-                </div>
-            </div>
-            <div class="bottom_prod_box"></div>
-            <div class="prod_details_tab">
-                <a href="#"
-                   title="header=[Add to cart] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/cart.gif" class="left_bt"/>
-                </a>
-                <a
-                    href="#"
-                    title="header=[Specials] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/favs.gif" class="left_bt"/>
-                </a>
-                <a href="#"
-                   title="header=[Gifts] body=[&nbsp;] fade=[on]">
-                    <img src="~/css/images/favorites.gif" class="left_bt"/>
-                </a>
-                <a href="details.html" class="prod_details">details</a>
-            </div>
-        </div>
+
+        @if (similarProducts != null && similarProducts.Count > 0)
+        {
+            <div class="center_title_bar">Similar products</div>
+            foreach (var product in similarProducts)
+            {
+                @await Html.PartialAsync("Components/ProductBox", product)
+            }
+        }
     </div>
     <!-- end of center content -->
     @await Html.PartialAsync("Components/RightContent")
 </div>
+
+<script>
+const bigThumbnail = document.getElementById("big-thumbnail");
+
+const swapThumbnail = (index) => {
+    let currentSrc = bigThumbnail.src;
+    let smallThumb = document.getElementById(`small-thumb-${index}`);
+    bigThumbnail.src = smallThumb.src;
+    smallThumb.src = currentSrc;
+}
+
+</script>

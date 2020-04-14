@@ -1,27 +1,23 @@
-<div class="title_box">Manufacturers</div>
-<ul class="left_menu">
-    <li class="odd">
-        <a href="#">Sony</a>
-    </li>
-    <li class="even">
-        <a href="#">Samsung</a>
-    </li>
-    <li class="odd">
-        <a href="#">Daewoo</a>
-    </li>
-    <li class="even">
-        <a href="#">LG</a>
-    </li>
-    <li class="odd">
-        <a href="#">Fujitsu Siemens</a>
-    </li>
-    <li class="even">
-        <a href="#">Motorola</a>
-    </li>
-    <li class="odd">
-        <a href="#">Phillips</a>
-    </li>
-    <li class="even">
-        <a href="#">Beko</a>
-    </li>
-</ul>
+@{
+    List<String> manufacturers = ViewData["Manufacturers"] as List<String>;
+}
+
+@{
+    bool isEven = false;
+    string itemClass = "odd";
+
+    if (manufacturers != null)
+    {
+        <div class="title_box">Manufacturers</div>
+        <ul class="left_menu">
+            @foreach (var manufacturer in manufacturers)
+            {
+                <li class="@itemClass">
+                    <a href="#">@manufacturer</a>
+                </li>
+                isEven = !isEven;
+                itemClass = isEven ? "even" : "odd";
+            }
+        </ul>
+    }
+}

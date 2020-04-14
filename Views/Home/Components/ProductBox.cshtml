@@ -9,7 +9,17 @@
         </div>
         <div class="product_img">
             <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId">
-                <img src="~/css/images/laptop.gif" alt=""/>
+                @{
+                    var productImages = Model.ProductImage;
+                    if (productImages != null && productImages.Count > 0)
+                    {
+                        <img src="@productImages[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
+                    }
+                    else
+                    {
+                        <img src="~/css/images/laptop.gif" alt=""/>
+                    }
+                }
             </a>
         </div>
         <div class="prod_price">

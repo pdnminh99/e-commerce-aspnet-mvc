@@ -8,9 +8,13 @@ namespace EcommerceApp2259.Context
 {
     public class ApplicationContext : DbContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+        {
+        }
 
         public DbSet<Product> Product { get; set; }
+
+        public DbSet<ProductImage> ProductImage { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +23,5 @@ namespace EcommerceApp2259.Context
             //     .WithMany(p => p/)
             //     .HasForeignKey(i => i.ProductId);
         }
-
     }
 }

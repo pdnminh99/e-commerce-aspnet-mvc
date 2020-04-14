@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EcommerceApp2259.Models;
 using System;
+using System.Collections.Generic;
 using EcommerceApp2259.Services;
 
 namespace EcommerceApp2259.Controllers
@@ -10,28 +11,42 @@ namespace EcommerceApp2259.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IProductServiceOperations _productCtx;
+        private readonly IProductServiceOperations _service;
+        private readonly List<String> _manufacturers = new List<string>();
+        private readonly List<String> _categories = new List<string>();
 
         public HomeController(ILogger<HomeController> logger, IProductServiceOperations service)
         {
             _logger = logger;
-            _productCtx = service;
+            _service = service;
+            _manufacturers.Add("Samsung");
+            _manufacturers.Add("Daewoo");
+            _manufacturers.Add("Fujitsu Siemens");
+            _manufacturers.Add("Motorola");
+            _manufacturers.Add("Phillips");
+            _manufacturers.Add("Beko");
+            _categories.Add("Motherboards");
+            _categories.Add("Desktops");
+            _categories.Add("Laptops");
+            _categories.Add("Notebooks");
         }
 
 #nullable enable
         public IActionResult Index(string? keyword)
         {
-            var products = keyword == null ? _productCtx.Get() : _productCtx.Get(keyword);
-
-            ViewData["ItemsPerRow"] = 5;
+            var products = keyword == null ? _service.Get() : _service.Get(keyword);
+            ViewData["Manufacturers"] = _manufacturers;
+            ViewData["Categories"] = _categories;
             return View(products);
         }
 
         public IActionResult ProductDetail(Guid productId)
         {
-            if (productId == null) return NotFound();
-            var product = _productCtx.Get(productId);
+            ViewData["SimilarProducts"] = _service.Get();
+            var product = _service.Get(productId);
             if (product == null) return NotFound();
+            ViewData["Manufacturers"] = _manufacturers;
+            ViewData["Categories"] = _categories;
             return View(product);
         }
 
@@ -47,7 +62,7 @@ namespace EcommerceApp2259.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }
