@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using EcommerceApp2259.Models;
 using System;
 using EcommerceApp2259.Services;
-using EcommerceApp2259.Context;
 
 namespace EcommerceApp2259.Controllers
 {
@@ -24,7 +23,6 @@ namespace EcommerceApp2259.Controllers
         {
             var products = keyword == null ? _productCtx.Get() : _productCtx.Get(keyword);
 
-            Console.WriteLine($"There are {products.Count}");
             ViewData["ItemsPerRow"] = 5;
             return View(products);
         }

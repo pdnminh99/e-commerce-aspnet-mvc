@@ -1,0 +1,34 @@
+@using Newtonsoft.Json
+@model EcommerceApp2259.Models.Product
+
+<div class="prod_box">
+    <div class="top_prod_box"></div>
+    <div class="center_prod_box">
+        <div class="product_title">
+            <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId">@Model.Title</a>
+        </div>
+        <div class="product_img">
+            <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId">
+                <img src="~/css/images/laptop.gif" alt=""/>
+            </a>
+        </div>
+        <div class="prod_price">
+            @* <span class="reduce"></span> *@
+            <span class="price">@Model.OriginalPrice$</span>
+        </div>
+    </div>
+    <div class="bottom_prod_box"></div>
+
+    <div class="prod_details_tab">
+        <a title="header=[Add to cart] body=[&nbsp;] fade=[on]" onclick="addItem('@JsonConvert.SerializeObject(Model)')">
+            <img src="~/css/images/cart.gif" class="left_bt" alt=""/>
+        </a>
+        <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]">
+            <img src="~/css/images/favs.gif" class="left_bt" alt=""/>
+        </a>
+        <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]">
+            <img src="~/css/images/favorites.gif" class="left_bt" alt=""/>
+        </a>
+        <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId" class="prod_details">details</a>
+    </div>
+</div>

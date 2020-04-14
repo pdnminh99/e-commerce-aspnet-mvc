@@ -1,6 +1,6 @@
 ﻿@model List<EcommerceApp2259.Models.Product>;
 
-@{
+@* @{
     ViewData["Title"] = "Home Page";
     ViewData["ItemsPerRow"] ??= 3;
 }
@@ -14,5 +14,18 @@
             @await Html.PartialAsync("Components/ProductsShowcase", Model)
         </div>
     </div>
-    
+</div> *@
+
+
+<div id="main_content">
+    @await Html.PartialAsync("Components/NavigationBar")
+    <!-- end of menu tab -->
+    <div class="crumb_navigation">Navigation:<a class="current" asp-controller="Home" asp-action="Index">Home</a></div>
+    @await Html.PartialAsync("Components/CategoriesDisplay")
+    <!-- end of left content -->
+    <div class="center_content">
+        @await Html.PartialAsync("Components/ProductsShowcase", Model)
+    </div>
+    <!-- end of center content -->
+    @await Html.PartialAsync("Components/RightContent")
 </div>

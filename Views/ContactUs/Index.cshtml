@@ -1,0 +1,40 @@
+<div id="main_content">
+    @await Html.PartialAsync("Components/NavigationBar")
+    <!-- end of menu tab -->
+    <div class="crumb_navigation">Navigation:<a class="current" asp-controller="Home" asp-action="Index">Home</a></div>
+    @await Html.PartialAsync("Components/CategoriesDisplay")
+    <!-- end of left content -->
+    <div class="center_content">
+        <div class="center_title_bar">Contact Me</div>
+        <div class="prod_box_big">
+            <div class="top_prod_box_big"></div>
+            <div class="center_prod_box_big">
+                <div class="contact_form">
+                    <div class="form_row">
+                        <p class="contact">
+                            <strong>Name:&nbsp;@ViewData["Name"]</strong>
+                        </p>
+                    </div>
+                    <div class="form_row">
+                        <p class="contact">
+                            <strong>StudentID:&nbsp;@ViewData["StudentId"]</strong>
+                        </p>
+                    </div>
+                    <div class="form_row">
+                        <p class="contact">
+                            <strong>University:&nbsp;@ViewData["University"]</strong>
+                        </p>
+                    </div>
+                    <div class="form_row">
+                        <p class="contact">
+                            <strong>Class:&nbsp;@ViewData["Class"]</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom_prod_box_big"></div>
+        </div>
+    </div>
+    <!-- end of center content -->
+    @await Html.PartialAsync("Components/RightContent")
+</div>

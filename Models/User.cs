@@ -20,9 +20,9 @@ namespace EcommerceApp2259.Models
             {
                 Type = value switch
                 {
-                    "customer" => UserType.CUSTOMER,
-                    "admin" => UserType.ADMIN,
-                    _ => UserType.UNKNOWN
+                    "customer" => UserType.Customer,
+                    "admin" => UserType.Admin,
+                    _ => UserType.Unknown
                 };
             }
         }
