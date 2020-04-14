@@ -49,87 +49,152 @@
     @await Html.PartialAsync("Components/CategoriesDisplay")
 
     <div class="center_content">
-      <div class="center_title_bar">Product</div>
-      <div class="prod_box_big">
-        <div class="top_prod_box_big"></div>
-        <div class="center_prod_box_big">
-          <div class="product_img_big"> <a href="javascript:popImage('~/css/imagesbig_pic.jpg','Some Title')"
-              title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="~/css/imageslaptop.gif" /></a>
-            <div class="thumbs"> <a href="#"
-                title="header=[Thumb1] body=[&nbsp;] fade=[on]"><img src="~/css/imagesthumb1.gif" /></a>
-              <a href="#"
-                title="header=[Thumb2] body=[&nbsp;] fade=[on]"><img src="~/css/imagesthumb1.gif" /></a>
-              <a href="#"
-                title="header=[Thumb3] body=[&nbsp;] fade=[on]"><img src="~/css/imagesthumb1.gif" /></a>
+        <div class="center_title_bar">Product</div>
+        <div class="prod_box_big">
+            <div class="top_prod_box_big"></div>
+            <div class="center_prod_box_big">
+                <div class="product_img_big">
+                    <a href="javascript:popImage('~/css/imagesbig_pic.jpg','Some Title')"
+                       title="header=[Zoom] body=[&nbsp;] fade=[on]">
+                        <img src="~/css/imageslaptop.gif"/>
+                    </a>
+                    <div class="thumbs">
+                        <a href="#"
+                           title="header=[Thumb1] body=[&nbsp;] fade=[on]">
+                            <img src="~/css/imagesthumb1.gif"/>
+                        </a>
+                        <a href="#"
+                           title="header=[Thumb2] body=[&nbsp;] fade=[on]">
+                            <img src="~/css/imagesthumb1.gif"/>
+                        </a>
+                        <a href="#"
+                           title="header=[Thumb3] body=[&nbsp;] fade=[on]">
+                            <img src="~/css/imagesthumb1.gif"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="details_big_box">
+                    <div class="product_title_big">@Model.Title</div>
+                    <div class="specifications">
+                        Disponibilitate: <span class="blue">In stock</span><br/>
+                        @Html.DisplayNameFor(m => m.Brand): <span class="blue">@Model.Brand</span><br/>
+                        @Html.DisplayNameFor(m => m.Category): <span class="blue">@Model.Category</span><br/>
+                        @Html.DisplayNameFor(m => m.CreatedDate): <span class="blue">@Model.CreatedDate.ToString()</span><br/>
+                    </div>
+                    <div class="prod_price_big">
+                        @* <span class="reduce">350$</span>  *@
+                        <span class="price">@Model.OriginalPrice$</span>
+                    </div>
+                    <a href="#" class="addtocart">add to cart</a>
+                    <a
+                        href="#" class="compare">
+                        compare
+                    </a>
+                </div>
             </div>
-          </div>
-          <div class="details_big_box">
-            <div class="product_title_big">@Model.Title</div>
-            <div class="specifications"> Disponibilitate: <span class="blue">In stock</span><br />
-              Brand: <span class="blue">@Model.Brand</span><br />
-              Category: <span class="blue">@Model.Category</span><br />
-              Datetime: <span class="blue">@Model.CreatedDate.ToString()</span><br />
+            <div class="bottom_prod_box_big"></div>
+        </div>
+        <div class="center_title_bar">Similar products</div>
+        <div class="prod_box">
+            <div class="top_prod_box"></div>
+            <div class="center_prod_box">
+                <div class="product_title">
+                    <a href="#">Motorola 156 MX-VL</a>
+                </div>
+                <div class="product_img">
+                    <a href="#">
+                        <img src="~/css/imageslaptop.gif"/>
+                    </a>
+                </div>
+                <div class="prod_price">
+                    <span class="reduce">350$</span> <span class="price">270$</span>
+                </div>
             </div>
-            <div class="prod_price_big">
-              @* <span class="reduce">350$</span>  *@
-              <span class="price">@Model.OriginalPrice</span>
+            <div class="bottom_prod_box"></div>
+            <div class="prod_details_tab">
+                <a href="#"
+                   title="header=[Add to cart] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagescart.gif" class="left_bt"/>
+                </a>
+                <a
+                    href="#"
+                    title="header=[Specials] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagesfavs.gif" class="left_bt"/>
+                </a>
+                <a href="#"
+                   title="header=[Gifts] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagesfavorites.gif" class="left_bt"/>
+                </a>
+                <a href="#" class="prod_details">details</a>
             </div>
-            <a href="#" class="addtocart">add to cart</a> <a
-              href="#" class="compare">compare</a>
-          </div>
         </div>
-        <div class="bottom_prod_box_big"></div>
-      </div>
-      <div class="center_title_bar">Similar products</div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="#">Motorola 156 MX-VL</a></div>
-          <div class="product_img"><a href="#"><img src="~/css/imageslaptop.gif" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+        <div class="prod_box">
+            <div class="top_prod_box"></div>
+            <div class="center_prod_box">
+                <div class="product_title">
+                    <a href="details.html">Iphone Apple</a>
+                </div>
+                <div class="product_img">
+                    <a href="details.html">
+                        <img src="~/css/imagesp4.gif"/>
+                    </a>
+                </div>
+                <div class="prod_price">
+                    <span class="price">270$</span>
+                </div>
+            </div>
+            <div class="bottom_prod_box"></div>
+            <div class="prod_details_tab">
+                <a href="#"
+                   title="header=[Add to cart] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagescart.gif" class="left_bt"/>
+                </a>
+                <a
+                    href="#"
+                    title="header=[Specials] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagesfavs.gif" class="left_bt"/>
+                </a>
+                <a href="#"
+                   title="header=[Gifts] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagesfavorites.gif" class="left_bt"/>
+                </a>
+                <a href="details.html" class="prod_details">details</a>
+            </div>
         </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#"
-            title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="~/css/imagescart.gif" class="left_bt" /></a> <a
-            href="#"
-            title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="~/css/imagesfavs.gif" class="left_bt" /></a>
-          <a href="#"
-            title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="~/css/imagesfavorites.gif" class="left_bt" /></a>
-          <a href="#" class="prod_details">details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Iphone Apple</a></div>
-          <div class="product_img"><a href="details.html"><img src="~/css/imagesp4.gif" /></a></div>
-          <div class="prod_price"><span class="price">270$</span></div>
+        <div class="prod_box">
+            <div class="top_prod_box"></div>
+            <div class="center_prod_box">
+                <div class="product_title">
+                    <a href="details.html">Samsung Webcam</a>
+                </div>
+                <div class="product_img">
+                    <a href="details.html">
+                        <img src="~/css/imagesp5.gif"/>
+                    </a>
+                </div>
+                <div class="prod_price">
+                    <span class="reduce">350$</span> <span class="price">270$</span>
+                </div>
+            </div>
+            <div class="bottom_prod_box"></div>
+            <div class="prod_details_tab">
+                <a href="#"
+                   title="header=[Add to cart] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagescart.gif" class="left_bt"/>
+                </a>
+                <a
+                    href="#"
+                    title="header=[Specials] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagesfavs.gif" class="left_bt"/>
+                </a>
+                <a href="#"
+                   title="header=[Gifts] body=[&nbsp;] fade=[on]">
+                    <img src="~/css/imagesfavorites.gif" class="left_bt"/>
+                </a>
+                <a href="details.html" class="prod_details">details</a>
+            </div>
         </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#"
-            title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="~/css/imagescart.gif" class="left_bt" /></a> <a
-            href="#"
-            title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="~/css/imagesfavs.gif" class="left_bt" /></a>
-          <a href="#"
-            title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="~/css/imagesfavorites.gif" class="left_bt" /></a>
-          <a href="details.html" class="prod_details">details</a> </div>
-      </div>
-      <div class="prod_box">
-        <div class="top_prod_box"></div>
-        <div class="center_prod_box">
-          <div class="product_title"><a href="details.html">Samsung Webcam</a></div>
-          <div class="product_img"><a href="details.html"><img src="~/css/imagesp5.gif" /></a></div>
-          <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
-        </div>
-        <div class="bottom_prod_box"></div>
-        <div class="prod_details_tab"> <a href="#"
-            title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="~/css/imagescart.gif" class="left_bt" /></a> <a
-            href="#"
-            title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="~/css/imagesfavs.gif" class="left_bt" /></a>
-          <a href="#"
-            title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="~/css/imagesfavorites.gif" class="left_bt" /></a>
-          <a href="details.html" class="prod_details">details</a> </div>
-      </div>
     </div>
     <!-- end of center content -->
     @await Html.PartialAsync("Components/RightContent")
-  </div>
+</div>

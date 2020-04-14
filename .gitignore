@@ -11,6 +11,7 @@
 *.dll.config
 *.cache
 *.suo
+.idea
 # Include dlls if they’re in the NuGet packages directory
 !/packages/*/lib/*.dll
 !/packages/*/lib/*/*.dll

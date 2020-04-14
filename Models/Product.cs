@@ -13,16 +13,16 @@ namespace EcommerceApp2259.Models
         [Display(Name = "Tên sản phẩm")]
         public string Title { get; set; }
 
-        public ICollection<ProductImage> ProductImages { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
 
-        public ICollection<ProductDetail> Details { get; set; }
+        public List<ProductDetail> Details { get; set; }
 
         public Guid? Owner { get; set; }
 
         [Column("Price"), Display(Name = "Giá")]
         public int OriginalPrice { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.DateTime), Display(Name = "Ngày tạo")]
         public DateTime CreatedDate { get; }
 
         [Display(Name = "Mục sản phẩm")]

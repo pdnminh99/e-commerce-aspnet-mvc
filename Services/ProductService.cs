@@ -40,7 +40,7 @@ namespace EcommerceApp2259.Services
 
         public List<Product> Get() => _productCtx.Get();
 
-        public List<Product> Get(String keyword)
+        public List<Product> Get(string keyword)
         {
             return _productCtx.Get(keyword);
         }

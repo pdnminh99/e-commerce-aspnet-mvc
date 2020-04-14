@@ -23,7 +23,6 @@ namespace EcommerceApp2259.Controllers
         {
             var products = keyword == null ? _productCtx.Get() : _productCtx.Get(keyword);
 
-            Console.WriteLine($"There are {products.Count}");
             ViewData["ItemsPerRow"] = 5;
             return View(products);
         }
