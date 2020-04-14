@@ -2,8 +2,9 @@
     <div class="shopping_cart">
         <div class="cart_title">Shopping cart</div>
         <div class="cart_details">
-            3 items <br/>
-            <span class="border_cart"></span>Total: <span class="price">350$</span>
+            <p id="cart-item-count">0 item</p>
+            <br/>
+            <span class="border_cart"></span>Total: <span class="price" id="cart-total-price">0$</span>
         </div>
         <div class="cart_icon">
             <a href="#" title="header=[Checkout] body=[&nbsp;] fade=[on]">
@@ -24,4 +25,67 @@
         </a>
     </div>
 </div>
-<!-- end of right content -->
+
+<script type="text/javascript">
+const shoppingCart = (function () {
+    let cartString = localStorage.getItem("cart");
+    if (cartString == null) {
+        localStorage.setItem("cart", "{}");
+        return {}
+    }
+    return JSON.parse(cartString)
+})();
+
+const addProductToCart = ({ProductId, Title, Image, OriginalPrice, Category, Brand}, count) => {
+    if (count == null) {
+        count = 1;
+    }
+    let existingItem = shoppingCart[ProductId];
+    if (existingItem == null) {
+        shoppingCart[ProductId] = {ProductId, Title, Image, OriginalPrice, Category, Brand, count}
+    } else {
+        shoppingCart[ProductId].count += count;
+    }
+    if (shoppingCart[ProductId].Title !== Title) {
+        shoppingCart[ProductId].Title = Title;
+    }
+    if (shoppingCart[ProductId].Image !== Image) {
+        shoppingCart[ProductId].Image = Image;
+    }
+    if (shoppingCart[ProductId].OriginalPrice !== OriginalPrice) {
+        shoppingCart[ProductId].OriginalPrice = OriginalPrice;
+    }
+    if (shoppingCart[ProductId].Category !== Category) {
+        shoppingCart[ProductId].Category = Category;
+    }
+    if (shoppingCart[ProductId].Brand !== Brand) {
+        shoppingCart[ProductId].Brand = Brand;
+    }
+    localStorage.setItem("cart", JSON.stringify(shoppingCart))
+};
+
+const itemCountDisplayElement = document.getElementById("cart-item-count");
+const totalPriceDisplayElement = document.getElementById("cart-total-price");
+
+const refreshShoppingCart = () => {
+    let totalPrice = 0;
+    let totalItemsCount = 0;
+
+    for (let itemId of Object.keys(shoppingCart)) {
+        
+        console.log(shoppingCart[itemId]);
+        totalPrice += shoppingCart[itemId].count * shoppingCart[itemId].OriginalPrice;
+        totalItemsCount += shoppingCart[itemId].count;
+    }
+    itemCountDisplayElement.innerText = totalItemsCount + (totalItemsCount > 1 ? ' items' : 'item');
+    totalPriceDisplayElement.innerText = `${totalPrice}$`
+};
+
+function addItem(json) {
+    console.log(json);
+    addProductToCart(JSON.parse(json), 1);
+    refreshShoppingCart();
+}
+
+refreshShoppingCart();
+</script>

@@ -1,3 +1,4 @@
+@using Newtonsoft.Json
 @model EcommerceApp2259.Models.Product
 
 <div class="prod_box">
@@ -17,8 +18,9 @@
         </div>
     </div>
     <div class="bottom_prod_box"></div>
+
     <div class="prod_details_tab">
-        <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]">
+        <a title="header=[Add to cart] body=[&nbsp;] fade=[on]" onclick="addItem('@JsonConvert.SerializeObject(Model)')">
             <img src="~/css/images/cart.gif" class="left_bt" alt=""/>
         </a>
         <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]">
@@ -27,6 +29,6 @@
         <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]">
             <img src="~/css/images/favorites.gif" class="left_bt" alt=""/>
         </a>
-        <a href="~/details.html" class="prod_details">details</a>
+        <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId" class="prod_details">details</a>
     </div>
 </div>

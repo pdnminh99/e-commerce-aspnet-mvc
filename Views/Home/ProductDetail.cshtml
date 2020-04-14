@@ -1,4 +1,5 @@
-﻿@model EcommerceApp2259.Models.Product;
+﻿@using Newtonsoft.Json
+@model EcommerceApp2259.Models.Product;
 
 @* @{
     ViewData["Title"] = "Privacy Policy";
@@ -85,7 +86,7 @@
                         @* <span class="reduce">350$</span>  *@
                         <span class="price">@Model.OriginalPrice$</span>
                     </div>
-                    <a href="#" class="addtocart">add to cart</a>
+                    <a class="addtocart" onclick="addItem('@JsonConvert.SerializeObject(Model)')">add to cart</a>
                     <a
                         href="#" class="compare">
                         compare
