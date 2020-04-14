@@ -42,6 +42,17 @@
                         @Html.DisplayNameFor(m => m.Brand): <span class="blue">@Model.Brand</span><br/>
                         @Html.DisplayNameFor(m => m.Category): <span class="blue">@Model.Category</span><br/>
                         @Html.DisplayNameFor(m => m.CreatedDate): <span class="blue">@Model.CreatedDate.ToString()</span><br/>
+                        @{
+                            var productDetails = Model.ProductDetail;
+                            if (productDetails != null && productDetails.Count > 0)
+                            {
+                                <hr />
+                                foreach (var detail in productDetails)
+                                {
+                                    <span>@detail.Keyword:&nbsp;@detail.Description</span><br />
+                                }
+                            }
+                        }
                     </div>
                     <div class="prod_price_big">
                         @* <span class="reduce">350$</span>  *@

@@ -14,7 +14,7 @@ namespace EcommerceApp2259.Models
 
         public List<ProductImage> ProductImage { get; set; }
 
-        // public List<ProductDetail> Details { get; set; }
+        public List<ProductDetail> ProductDetail { get; set; }
 
         public Guid? Owner { get; set; }
 
