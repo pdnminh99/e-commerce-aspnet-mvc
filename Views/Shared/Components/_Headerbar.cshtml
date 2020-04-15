@@ -1,3 +1,5 @@
+@using System.Text.Json;
+
 @{
     var offeredProducts = ViewData["OfferedProducts"] as List<Product>;
 }
@@ -20,12 +22,13 @@
                     {
                         <img style="max-height: 92px; max-width: 94px;"
                              src="@offeredProducts[0].ProductImage[0].URI"
+                             id="offer-image"
                              class="oferta_img"
                              alt="@offeredProducts[0].Title"/>
                     }
                     <div class="oferta_details">
-                        <div class="oferta_title">@offeredProducts[0].Title</div>
-                        <div class="oferta_text">
+                        <div class="oferta_title" id="offer-title">@offeredProducts[0].Title</div>
+                        <div class="oferta_text" id="offer-description">
                             @{
                                 var overview = offeredProducts[0].Overview;
                                 if (overview == null)
@@ -50,15 +53,15 @@
                         <a asp-action="ProductDetail" asp-route-productId="@offeredProducts[0].ProductId" class="details">details</a>
                     </div>
                 </div>
-                <div class="oferta_pagination">
-                    @{
-                        <span class="current">1</span>
-                        for (var count = 1; count < offeredProducts.Count && count < 5; count++)
+                @if (offeredProducts.Count > 1)
+                {
+                    <div class="oferta_pagination" style="display: table">
+                        @for (var count = 0; count < offeredProducts.Count && count < 5; count++)
                         {
-                            <a href="#">@(count + 1)</a>
+                            <span style="display: table-cell" id="page-@count" onclick="clickNext(@(count))" class="@(count == 0 ? "current" : "not-current")">@(count + 1)</span>
                         }
-                    }
-                </div>
+                    </div>
+                }
             </div>
         }
         <div class="top_divider">
@@ -68,10 +71,70 @@
     <!-- end of oferte_content-->
 </div>
 
-<script>
 
-var interval = null;
+@if (offeredProducts != null && offeredProducts.Count > 1)
+{
+    <script>
+    var interval = null;
+    var currentIndex = 0;
+    const maxIndex = @offeredProducts.Count - 1;
+    const products = JSON.parse('@Html.Raw(JsonSerializer.Serialize(offeredProducts))');
 
+    const offerImageElement = document.getElementById("offer-image");
+    const offerTitleElement = document.getElementById("offer-title");
+    const offerDescription = document.getElementById("offer-description");
 
-    
+    if (currentIndex !== maxIndex) {
+
+        function initInterval() {
+            interval = setInterval(() => {
+                // Remove class `current` from current page number.
+                let currentPage = document.getElementById(`page-${currentIndex}`);
+                currentPage.className = "not-current";
+
+                // Set next page number as `current`.
+                currentIndex += 1;
+                if (currentIndex > maxIndex) {
+                    currentIndex = 0;
+                }
+                offerImageElement.src = products[currentIndex].ProductImage[0].URI;
+                offerTitleElement.innerText = products[currentIndex].Title;
+                let overview = products[currentIndex].Overview;
+                if (overview.length > 220) {
+                    overview = overview.substring(0, 220) + "...";
+                }
+                offerDescription.innerText = overview;
+                
+                currentPage = document.getElementById(`page-${currentIndex}`);
+                currentPage.className = "current";
+            }, 3000);
+        }
+
+        function clickNext(index) {
+            if (interval !== null) {
+                clearInterval(interval);
+                interval = null;
+            }
+            let currentPage = document.getElementById(`page-${currentIndex}`);
+            currentPage.className = "not-current";
+
+            currentIndex = index;
+
+            offerImageElement.src = products[index].ProductImage[0].URI;
+            offerTitleElement.innerText = products[index].Title;
+            let overview = products[index].Overview;
+            if (overview.length > 220) {
+                overview = `${overview.substring(0, 220)}...`;
+            }
+            offerDescription.innerText = overview;
+            
+            currentPage = document.getElementById(`page-${currentIndex}`);
+            currentPage.className = "current";
+            initInterval();
+        }
+
+        initInterval();
+    }
+
 </script>
+}
