@@ -1,5 +1,5 @@
 @{
-    List<String> manufacturers = ViewData["Manufacturers"] as List<String>;
+    var manufacturers = ViewData["Manufacturers"] as List<Brand>;
 }
 
 @{
@@ -13,7 +13,7 @@
             @foreach (var manufacturer in manufacturers)
             {
                 <li class="@itemClass">
-                    <a href="#">@manufacturer</a>
+                    <a href="#">@manufacturer.Name</a>
                 </li>
                 isEven = !isEven;
                 itemClass = isEven ? "even" : "odd";

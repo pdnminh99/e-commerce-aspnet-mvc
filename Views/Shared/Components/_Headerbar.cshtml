@@ -1,3 +1,7 @@
+@{
+    var offeredProducts = ViewData["OfferedProducts"] as List<Product>;
+}
+
 <div id="header">
     <div id="logo">
         <a href="#">
@@ -8,26 +12,66 @@
         <div class="top_divider">
             <img src="~/css/images/header_divider.png" width="1" height="164"/>
         </div>
-        <div class="oferta">
-            <div class="oferta_content">
-                <img src="~/css/images/laptop.png" width="94" height="92" class="oferta_img"/>
-                <div class="oferta_details">
-                    <div class="oferta_title">Samsung GX 2004 LM</div>
-                    <div class="oferta_text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
-                    <a href="~/details.html" class="details">details</a>
+        @if (offeredProducts != null && offeredProducts.Count > 0)
+        {
+            <div class="oferta">
+                <div class="oferta_content">
+                    @if (offeredProducts[0].ProductImage != null && offeredProducts[0].ProductImage.Count > 0)
+                    {
+                        <img style="max-height: 92px; max-width: 94px;"
+                             src="@offeredProducts[0].ProductImage[0].URI"
+                             class="oferta_img"
+                             alt="@offeredProducts[0].Title"/>
+                    }
+                    <div class="oferta_details">
+                        <div class="oferta_title">@offeredProducts[0].Title</div>
+                        <div class="oferta_text">
+                            @{
+                                var overview = offeredProducts[0].Overview;
+                                if (overview == null)
+                                {
+                                    <p>No overview!</p>
+                                }
+                                else
+                                {
+                                    if (overview.Length > 220)
+                                    {
+                                        <p>@offeredProducts[0].Overview.Substring(0, 220)...</p>
+                                    }
+                                    else
+                                    {
+                                        <p>
+                                            @offeredProducts[0].Overview
+                                        </p>
+                                    }
+                                }
+                            }
+                        </div>
+                        <a asp-action="ProductDetail" asp-route-productId="@offeredProducts[0].ProductId" class="details">details</a>
+                    </div>
+                </div>
+                <div class="oferta_pagination">
+                    @{
+                        <span class="current">1</span>
+                        for (var count = 1; count < offeredProducts.Count && count < 5; count++)
+                        {
+                            <a href="#">@(count + 1)</a>
+                        }
+                    }
                 </div>
             </div>
-            <div class="oferta_pagination">
-                <span class="current">1</span>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-            </div>
-        </div>
+        }
         <div class="top_divider">
             <img src="~/css/images/header_divider.png" width="1" height="164"/>
         </div>
     </div>
     <!-- end of oferte_content-->
 </div>
+
+<script>
+
+var interval = null;
+
+
+    
+</script>

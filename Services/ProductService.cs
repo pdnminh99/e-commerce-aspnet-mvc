@@ -1,4 +1,4 @@
-using EcommerceApp2259.Context;
+using EcommerceApp2259.Contexts;
 using EcommerceApp2259.Models;
 using System;
 using System.Collections.Generic;
@@ -7,9 +7,9 @@ namespace EcommerceApp2259.Services
 {
     public class ProductService : IProductServiceOperations
     {
-        private readonly IProductContext _productCtx;
+        private readonly IGenericContext<Product> _productCtx;
 
-        public ProductService(IProductContext productCtx)
+        public ProductService(IGenericContext<Product> productCtx)
         {
             _productCtx = productCtx;
         }

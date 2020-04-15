@@ -1,5 +1,6 @@
-﻿@using Newtonsoft.Json
+﻿@* @using Newtonsoft.Json *@
 @model EcommerceApp2259.Models.Product;
+@using System.Text.Json;
 
 @{
     var similarProducts = ViewData["SimilarProducts"] as List<EcommerceApp2259.Models.Product>;
@@ -22,14 +23,16 @@
                     @*     <img src="~/css/images/laptop.gif"/> *@
                     @if (Model.ProductImage != null && Model.ProductImage.Count > 0)
                     {
-                        <img id="big-thumbnail" src="@Model.ProductImage[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
-                        <div class="thumbs">
+                        <div style="height: 106px; width: 173px;">
+                            <img id="big-thumbnail" src="@Model.ProductImage[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
+                        </div>
+                        <div class="thumbs" style="height: 31px; margin: 0; padding: 5px 0 0;">
                             @for (int i = 1; i < Model.ProductImage.Count; i++)
                             {
                                 <img id="small-thumb-@i"
                                      src="@Model.ProductImage[i].URI"
                                      alt=""
-                                     style="max-height: 30px; max-width: 30px"
+                                     style="max-height: 30px; max-width: 30px; margin: 0 1px; display: inline-block;"
                                      onclick="swapThumbnail(@i)"/>
                             }
                         </div>
@@ -39,17 +42,33 @@
                     <div class="product_title_big">@Model.Title</div>
                     <div class="specifications">
                         Disponibilitate: <span class="blue">In stock</span><br/>
-                        @Html.DisplayNameFor(m => m.Brand): <span class="blue">@Model.Brand</span><br/>
-                        @Html.DisplayNameFor(m => m.Category): <span class="blue">@Model.Category</span><br/>
-                        @Html.DisplayNameFor(m => m.CreatedDate): <span class="blue">@Model.CreatedDate.ToString()</span><br/>
+                        @if (Model.Brand != null)
+                        {
+                            <span>
+                                @Html.DisplayNameFor(m => m.Brand): <span class="blue">@Model.Brand.Name</span>
+                            </span>
+                            <br/>
+                        }
+                        @if (Model.Category != null)
+                        {
+                            <span>
+                                @Html.DisplayNameFor(m => m.Category): <span class="blue">@Model.Category.Name</span>
+                            </span>
+                            <br/>
+                        }
+                        <span>
+                            @Html.DisplayNameFor(m => m.CreatedDate): <span class="blue">@Model.CreatedDate.ToString()</span>
+                        </span>
+                        <br/>
                         @{
                             var productDetails = Model.ProductDetail;
                             if (productDetails != null && productDetails.Count > 0)
                             {
-                                <hr />
+                                <hr/>
                                 foreach (var detail in productDetails)
                                 {
-                                    <span>@detail.Keyword:&nbsp;@detail.Description</span><br />
+                                    <span>@detail.Keyword:&nbsp;@detail.Description</span>
+                                    <br/>
                                 }
                             }
                         }
@@ -58,7 +77,7 @@
                         @* <span class="reduce">350$</span>  *@
                         <span class="price">@Model.OriginalPrice$</span>
                     </div>
-                    <a class="addtocart" onclick="addItem('@JsonConvert.SerializeObject(Model)')">add to cart</a>
+                    <a class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
                     <a
                         href="#" class="compare">
                         compare

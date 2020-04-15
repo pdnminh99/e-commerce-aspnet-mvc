@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace EcommerceApp2259.Models
 {
@@ -16,7 +17,10 @@ namespace EcommerceApp2259.Models
 
         public List<ProductDetail> ProductDetail { get; set; }
 
-        public Guid? Owner { get; set; }
+        public string Overview { get; set; }
+        
+        [JsonIgnore]
+        public Guid? UserId { get; set; }
 
         [Column("Price"), Display(Name = "Price")]
         public int OriginalPrice { get; set; }
@@ -24,8 +28,10 @@ namespace EcommerceApp2259.Models
         [DataType(DataType.DateTime), Display(Name = "Created datetime")]
         public DateTime CreatedDate { get; }
 
-        [Display(Name = "Category")] public string Category { get; set; }
+        [Column("Category"), Display(Name = "Category")]
+        public Category Category { get; set; }
 
-        [Display(Name = "Brand")] public string Brand { get; set; }
+        [Column("Brand"), Display(Name = "Brand")]
+        public Brand Brand { get; set; }
     }
 }

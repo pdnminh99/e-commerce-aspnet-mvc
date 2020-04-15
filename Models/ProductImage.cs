@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using System.Text.Json.Serialization;
 
 namespace EcommerceApp2259.Models
 {
@@ -9,6 +10,9 @@ namespace EcommerceApp2259.Models
     {
         [Key] public int ImageId { get; set; }
 
-        [Column("URI")] public String URI { get; set; }
+        public String URI { get; set; }
+
+        [JsonIgnore]
+        public Product Product { get; set; }
     }
 }

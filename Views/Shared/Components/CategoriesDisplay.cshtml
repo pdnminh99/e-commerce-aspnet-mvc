@@ -1,5 +1,5 @@
 @{
-    var categories = ViewData["Categories"] as List<String>;
+    var categories = ViewData["Categories"] as List<Category>;
 }
 <div class="left_content">
     @if (categories != null)
@@ -11,13 +11,13 @@
                 if (i % 2 == 0)
                 {
                     <li class="odd">
-                        <a href="#">@categories[i]</a>
+                        <a href="#">@categories[i].Name</a>
                     </li>
                 }
                 else
                 {
                     <li class="even">
-                        <a href="#">@categories[i]</a>
+                        <a href="#">@categories[i].Name</a>
                     </li>
                 }
             }

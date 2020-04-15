@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EcommerceApp2259.Context
+namespace EcommerceApp2259.Contexts
 {
     public interface IGenericContext<T>
     {

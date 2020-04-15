@@ -1,0 +1,18 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
+
+namespace EcommerceApp2259.Models
+{
+    public class Category
+    {
+        [Key, Column("CategoryId")]
+        public int CategoryId { get; set; }
+        
+        public string Name { get; set; }
+        
+        // [JsonIgnore]
+        // public List<Product> Products { get; set; }
+    }
+}
