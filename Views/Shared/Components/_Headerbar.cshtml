@@ -17,16 +17,18 @@
         @if (offeredProducts != null && offeredProducts.Count > 0)
         {
             <div class="oferta">
-                <div class="oferta_content">
-                    @if (offeredProducts[0].ProductImage != null && offeredProducts[0].ProductImage.Count > 0)
-                    {
-                        <img style="max-height: 92px; max-width: 94px;"
-                             src="@offeredProducts[0].ProductImage[0].URI"
-                             id="offer-image"
-                             class="oferta_img"
-                             alt="@offeredProducts[0].Title"/>
-                    }
-                    <div class="oferta_details">
+                <div class="oferta_content" style="display: table;">
+                    <div style="display: table-cell; height: 92px; width: 94px; vertical-align: middle;">
+                        @if (offeredProducts[0].ProductImage != null && offeredProducts[0].ProductImage.Count > 0)
+                        {
+                            <img style="max-height: 92px; max-width: 94px;"
+                                 src="@offeredProducts[0].ProductImage[0].URI"
+                                 id="offer-image"
+                                 class="oferta_img"
+                                 alt="@offeredProducts[0].Title"/>
+                        }
+                    </div>
+                    <div class="oferta_details" style="display: table-cell; vertical-align: center;">
                         <div class="oferta_title" id="offer-title">@offeredProducts[0].Title</div>
                         <div class="oferta_text" id="offer-description">
                             @{
@@ -58,7 +60,7 @@
                     <div class="oferta_pagination" style="display: table">
                         @for (var count = 0; count < offeredProducts.Count && count < 5; count++)
                         {
-                            <span style="display: table-cell" id="page-@count" onclick="clickNext(@(count))" class="@(count == 0 ? "current" : "not-current")">@(count + 1)</span>
+                            <a href="javascript:void(0)" style="display: table-cell" id="page-@count" onclick="clickNext(@(count))" class="@(count == 0 ? "current" : "not-current")">@(count + 1)</a>
                         }
                     </div>
                 }

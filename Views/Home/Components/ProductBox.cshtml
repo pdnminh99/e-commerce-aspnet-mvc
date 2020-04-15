@@ -13,7 +13,7 @@
                     var productImages = Model.ProductImage;
                     if (productImages != null && productImages.Count > 0)
                     {
-                        <img src="@productImages[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
+                        <img id="product-img-@Model.ProductId" src="@productImages[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
                     }
                     else
                     {
@@ -30,15 +30,33 @@
     <div class="bottom_prod_box"></div>
 
     <div class="prod_details_tab">
-        <a title="header=[Add to cart] body=[&nbsp;] fade=[on]" onclick="addItem('@JsonSerializer.Serialize(Model)')">
+        <a href="javascript:void(0)" onclick="addItem('@JsonSerializer.Serialize(Model)')">
             <img src="~/css/images/cart.gif" class="left_bt" alt=""/>
         </a>
-        <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]">
+        <a href="javascript:void(0)">
             <img src="~/css/images/favs.gif" class="left_bt" alt=""/>
         </a>
-        <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]">
+        <a href="javascript:void(0)">
             <img src="~/css/images/favorites.gif" class="left_bt" alt=""/>
         </a>
         <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId" class="prod_details">details</a>
     </div>
 </div>
+
+@if (Model.ProductImage != null && Model.ProductImage.Count > 1)
+{
+    <script>
+    const imageElementOfProduct@(Model.ProductId.ToString().Replace("-", "")) = document.getElementById("product-img-@Model.ProductId");
+    const imagesOfProduct@(Model.ProductId.ToString().Replace("-", "")) = JSON.parse('@Html.Raw(JsonSerializer.Serialize(Model.ProductImage))');
+    const maxImageOfProduct@(Model.ProductId.ToString().Replace("-", "")) = imagesOfProduct@(Model.ProductId.ToString().Replace("-", "")).length - 1;
+    var currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", "")) = 0;
+    
+    setInterval(() => {
+        currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", "")) += 1;
+        if (currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", "")) > maxImageOfProduct@(Model.ProductId.ToString().Replace("-", ""))) {
+            currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", "")) = 0;
+        }
+        imageElementOfProduct@(Model.ProductId.ToString().Replace("-", "")).src = imagesOfProduct@(Model.ProductId.ToString().Replace("-", ""))[currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", ""))].URI;
+    }, 3000);
+    </script>
+}
