@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace EcommerceApp2259.Context
+namespace EcommerceApp2259.Contexts
 {
-    public interface IGenericContext<T> where T : IComparable<T>
+    public interface IGenericContext<T>
     {
         public T Add(T item);
 

@@ -1,43 +1,29 @@
+@{
+    var categories = ViewData["Categories"] as List<Category>;
+}
 <div class="left_content">
-    <div class="title_box">Categories</div>
-    <ul class="left_menu">
-        <li class="odd">
-            <a href="#">Processors</a>
-        </li>
-        <li class="even">
-            <a href="#">Motherboards</a>
-        </li>
-        <li class="odd">
-            <a href="#">Desktops</a>
-        </li>
-        <li class="even">
-            <a href="#">Laptops &amp; Notebooks</a>
-        </li>
-        <li class="odd">
-            <a href="#">Processors</a>
-        </li>
-        <li class="even">
-            <a href="#">Motherboards</a>
-        </li>
-        <li class="odd">
-            <a href="#">Processors</a>
-        </li>
-        <li class="even">
-            <a href="#">Motherboards</a>
-        </li>
-        <li class="odd">
-            <a href="#">Desktops</a>
-        </li>
-        <li class="even">
-            <a href="#">Laptops &amp; Notebooks</a>
-        </li>
-        <li class="odd">
-            <a href="#">Processors</a>
-        </li>
-        <li class="even">
-            <a href="#">Motherboards</a>
-        </li>
-    </ul>
+    @if (categories != null)
+    {
+        <div class="title_box">Categories</div>
+        <ul class="left_menu">
+            @for (var i = 0; i < categories.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    <li class="odd">
+                        <a href="#">@categories[i].Name</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="even">
+                        <a href="#">@categories[i].Name</a>
+                    </li>
+                }
+            }
+        </ul>
+    }
+
     <div class="title_box">Special Products</div>
     <div class="border_box">
         <div class="product_title">

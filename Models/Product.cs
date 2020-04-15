@@ -3,22 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace EcommerceApp2259.Models
 {
-    public class Product : IComparable<Product>
+    public class Product
     {
         public Guid ProductId { get; set; }
 
-        [Display(Name = "Product name")]
-        public string Title { get; set; }
+        [Display(Name = "Product name")] public string Title { get; set; }
 
-        [NotMapped]
-        public string Image { get; set; }
+        public List<ProductImage> ProductImage { get; set; }
 
-        public List<ProductDetail> Details { get; set; }
+        public List<ProductDetail> ProductDetail { get; set; }
 
-        public Guid? Owner { get; set; }
+        public string Overview { get; set; }
+        
+        [JsonIgnore]
+        public Guid? UserId { get; set; }
 
         [Column("Price"), Display(Name = "Price")]
         public int OriginalPrice { get; set; }
@@ -26,13 +28,10 @@ namespace EcommerceApp2259.Models
         [DataType(DataType.DateTime), Display(Name = "Created datetime")]
         public DateTime CreatedDate { get; }
 
-        [Display(Name = "Category")]
-        public string Category { get; set; }
+        [Column("Category"), Display(Name = "Category")]
+        public Category Category { get; set; }
 
-        [Display(Name = "Brand")]
-        public string Brand { get; set; }
-
-        public int CompareTo(Product other) => OriginalPrice.CompareTo(other.OriginalPrice);
+        [Column("Brand"), Display(Name = "Brand")]
+        public Brand Brand { get; set; }
     }
-
 }

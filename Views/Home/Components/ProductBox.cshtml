@@ -1,4 +1,4 @@
-@using Newtonsoft.Json
+@using System.Text.Json;
 @model EcommerceApp2259.Models.Product
 
 <div class="prod_box">
@@ -7,9 +7,19 @@
         <div class="product_title">
             <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId">@Model.Title</a>
         </div>
-        <div class="product_img">
+        <div class="product_img" style="width: 173px; height: 104px;">
             <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId">
-                <img src="~/css/images/laptop.gif" alt=""/>
+                @{
+                    var productImages = Model.ProductImage;
+                    if (productImages != null && productImages.Count > 0)
+                    {
+                        <img src="@productImages[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
+                    }
+                    else
+                    {
+                        <img src="~/css/images/laptop.gif" alt=""/>
+                    }
+                }
             </a>
         </div>
         <div class="prod_price">
@@ -20,7 +30,7 @@
     <div class="bottom_prod_box"></div>
 
     <div class="prod_details_tab">
-        <a title="header=[Add to cart] body=[&nbsp;] fade=[on]" onclick="addItem('@JsonConvert.SerializeObject(Model)')">
+        <a title="header=[Add to cart] body=[&nbsp;] fade=[on]" onclick="addItem('@JsonSerializer.Serialize(Model)')">
             <img src="~/css/images/cart.gif" class="left_bt" alt=""/>
         </a>
         <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]">
