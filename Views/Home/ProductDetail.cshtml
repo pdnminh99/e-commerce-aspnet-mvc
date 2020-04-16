@@ -1,5 +1,4 @@
-﻿const isNN=(navigator.appName==="Netscape") ? 1 : 0; const isIE=(navigator.appName.indexOf("Microsoft") !== -1) ? 1 : 0; @* @using Newtonsoft.Json *@
-@model EcommerceApp2259.Models.Product;
+﻿@model EcommerceApp2259.Models.Product;
 @using System.Text.Json;
 
 @{
@@ -18,9 +17,6 @@
             <div class="top_prod_box_big"></div>
             <div class="center_prod_box_big">
                 <div class="product_img_big">
-                    @* <a href="javascript:popImage('~/css/imagesbig_pic.jpg','Some Title')" *@
-                    @*    title="header=[Zoom] body=[&nbsp;] fade=[on]"> *@
-                    @*     <img src="~/css/images/laptop.gif"/> *@
                     @if (Model.ProductImage != null && Model.ProductImage.Count > 0)
                     {
                         <div style="height: 106px; width: 173px;">
