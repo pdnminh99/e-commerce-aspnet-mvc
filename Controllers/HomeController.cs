@@ -46,9 +46,10 @@ namespace EcommerceApp2259.Controllers
                 _productService.Get(keyword);
             var brands = _brandService.Get();
             var categories = _categoryService.Get();
+            ViewData["SearchValue"] = keyword ?? "";
             ViewData["Manufacturers"] = brands;
             ViewData["Categories"] = categories;
-            ViewData["OfferedProducts"] = products;
+            ViewData["OfferedProducts"] = _productService.Get();
             ViewData["HeadLine"] = $"{products.Count} products found.";
             return View("Index", products);
         }
@@ -85,7 +86,7 @@ namespace EcommerceApp2259.Controllers
         public IActionResult Brand(int brandId)
         {
             var brand = _brandService.Get(brandId);
-            Console.WriteLine(brand);
+            // Console.WriteLine(brand);
 
             ViewData["Manufacturers"] = _brandService.Get();
             ViewData["Categories"] = _categoryService.Get();

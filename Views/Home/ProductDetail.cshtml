@@ -53,6 +53,7 @@
                 <div class="details_big_box">
                     <div class="product_title_big">@Model.Title</div>
                     <div class="specifications">
+                        <span style="text-align: justify; line-height: 130%;">@Model.Overview</span><hr />
                         Disponibilitate: <span class="blue">In stock</span><br/>
                         @if (Model.Brand != null)
                         {
@@ -100,7 +101,7 @@
                         @* <span class="reduce">350$</span>  *@
                         <span class="price">@Model.OriginalPrice$</span>
                     </div>
-                    <a class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
+                    <a href="javascript:void(0)" class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
                     <a
                         href="#" class="compare">
                         compare
