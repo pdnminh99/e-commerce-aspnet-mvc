@@ -1,0 +1,82 @@
+﻿<div class="center_title_bar">Cart</div>
+
+<div class="prod_box_big">
+    <div class="top_prod_box_big"></div>
+    <div id="cart-display" class="center_prod_box_big">
+    </div>
+
+    <style>
+        .card {
+        display: table;
+        width: 100%;
+        }
+        
+        .card-cell {
+        display: table-cell;
+        vertical-align: middle;
+        }
+        
+        .card-info {
+        text-align: left;
+        line-height: 150%;
+        }
+        
+    </style>
+
+    <script type="text/javascript">
+    
+    const cartDisplay = document.getElementById("cart-display");
+    
+    function removeItem(productId) {
+      document.getElementById(`item-${productId}`).remove();
+      delete shoppingCart[productId];
+      localStorage.setItem("cart", JSON.stringify(shoppingCart));
+      refreshShoppingCart();
+    }
+    
+    const createCartItem = (index, { ProductId, Title, Category, ProductImage, Brand, OriginalPrice, count }) => {
+        let card = document.createElement("div");
+        card.id = `item-${ProductId}`;
+        card.className = "card";
+        
+        card.innerHTML = `
+                <img style="display: table-cell; vertical-align: middle; max-width: 200px; max-height: 150px;" src="${ProductImage[0].URI}" alt=""/>
+                <div class="card-info" style="display: table-cell; vertical-align: middle;">
+                    <strong>${Title}</strong>
+                    <br/>
+                    <span>Brand: ${Brand.Name}</span>
+                    <br />
+                    <span>Category: ${Category.Name}</span>
+                </div>
+                <div style="display: table-cell; vertical-align: middle;">
+                    Count
+                    <br />
+                    <input id="price-input-${ProductId}" type="number" style="width: 50px;" min="0" value="${count}"/>
+                </div>
+                <div style="display: table-cell; vertical-align: middle;">
+                    Price
+                    <br />
+                    <span id="price-${ProductId}">
+                    ${OriginalPrice}$
+                    </span>
+                </div>
+                <div onclick="removeItem('${ProductId}')" style="display: table-cell; vertical-align: middle;">
+                    <a href="javascript:void(0)">Delete</a>
+                </div>
+        `;
+        cartDisplay.appendChild(card);
+    };
+    
+    (() => {
+      let count = 0;
+      
+      for (let key of Object.keys(shoppingCart)) {
+          console.log(shoppingCart[key]);
+          createCartItem(count, shoppingCart[key]);
+          count++;
+      }
+    })();
+    
+    </script>
+    <div class="bottom_prod_box_big"></div>
+</div>

@@ -1,5 +1,6 @@
 @{
     var categories = ViewData["Categories"] as List<Category>;
+    var specialProduct = ViewData["SpecialProduct"] as Product;
 }
 <div class="left_content">
     @if (categories != null)
@@ -24,29 +25,37 @@
         </ul>
     }
 
-    <div class="title_box">Special Products</div>
-    <div class="border_box">
-        <div class="product_title">
-            <a href="~/details.html">Motorola 156 MX-VL</a>
+    @if (specialProduct != null)
+    {
+        <div class="title_box">Special Products</div>
+        <div class="border_box">
+            <div class="product_title">
+                <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@specialProduct.ProductId">@specialProduct.Title</a>
+            </div>
+            @if (specialProduct.ProductImage != null && specialProduct.ProductImage.Count > 0)
+            {
+                <div class="product_img">
+                    <a asp-controller="Home" asp-action="ProductDetail" asp-route-productId="@specialProduct.ProductId">
+                        <img src="@specialProduct.ProductImage[0].URI" alt=""/>
+                    </a>
+                </div>
+            }
+            <div class="prod_price">
+                @* <span class="reduce">350$</span>  *@
+                <span class="price">@specialProduct.OriginalPrice$</span>
+            </div>
         </div>
-        <div class="product_img">
-            <a href="~/details.html">
-                <img src="~/images/laptop.png"/>
-            </a>
-        </div>
-        <div class="prod_price">
-            <span class="reduce">350$</span> <span class="price">270$</span>
-        </div>
-    </div>
+    }
+
+
     <div class="title_box">Newsletter</div>
     <div class="border_box">
         <input type="text" name="newsletter" class="newsletter_input" value="your email"/>
-        <a href="#" class="join">join</a>
+        <a href="javascript:void(0)" class="join">join</a>
     </div>
     <div class="banner_adds">
-        <a href="#">
-            <img
-                src="~/images/bann2.jpg"/>
+        <a href="javascript:void(0)">
+            <img src="~/css/images/bann2.jpg" alt=""/>
         </a>
     </div>
 </div>
