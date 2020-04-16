@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace EcommerceApp2259.Contexts
 {
-    public interface IGenericContext<T>
+    public interface IGenericContext<T, K>
     {
         public T Add(T item);
 
-        public T Delete(Guid itemId);
+        public T Delete(K itemId);
 
-        public T Edit(T replicant, bool autoInsertIfNotExist = false);
+        public T Edit(T newCopy, bool autoInsertIfNotExist = false);
 
-        public T Get(Guid uuid);
+        public T Get(K uuid);
 
         public List<T> Get();
 

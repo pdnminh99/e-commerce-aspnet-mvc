@@ -13,7 +13,7 @@ namespace EcommerceApp2259.Models
         
         public string Name { get; set; }
         
-        // [JsonIgnore]
-        // public List<Product> Products { get; set; }
+        [JsonIgnore]
+        public List<Product> Products { get; set; }
     }
 }

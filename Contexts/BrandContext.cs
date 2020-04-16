@@ -5,7 +5,7 @@ using EcommerceApp2259.Models;
 
 namespace EcommerceApp2259.Contexts
 {
-    public class BrandContext : IGenericContext<Brand>
+    public class BrandContext : IGenericContext<Brand, int>
     {
         private readonly ApplicationContext _ctx;
 
@@ -21,19 +21,19 @@ namespace EcommerceApp2259.Contexts
             throw new NotImplementedException();
         }
 
-        public Brand Delete(Guid itemId)
+        public Brand Delete(int itemId)
         {
             throw new NotImplementedException();
         }
 
-        public Brand Edit(Brand replicant, bool autoInsertIfNotExist = false)
+        public Brand Edit(Brand newCopy, bool autoInsertIfNotExist = false)
         {
             throw new NotImplementedException();
         }
 
-        public Brand Get(Guid uuid)
+        public Brand Get(int uuid)
         {
-            throw new NotImplementedException();
+            return _ctx.Brand.Find(uuid);
         }
 
         public List<Brand> Get()

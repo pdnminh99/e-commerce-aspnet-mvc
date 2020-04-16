@@ -1,15 +1,21 @@
 @model List<EcommerceApp2259.Models.Product>;
 
 @{
+    var headline = ViewData["HeadLine"];
     var recommendedProducts = ViewData["RecommendedProducts"] as List<EcommerceApp2259.Models.Product>;
 }
 
-<div class="center_title_bar">Latest Products.</div>
-@{
+<div class="center_title_bar">@(headline ?? "Latest products.")</div>
+@if (Model != null && Model.Count > 0)
+{
     foreach (var product in Model)
     {
         @await Html.PartialAsync("Components/ProductBox", product)
     }
+}
+else
+{
+    <h3>No products found!</h3>
 }
 
 @if (recommendedProducts != null && recommendedProducts.Count > 0)
@@ -17,100 +23,7 @@
     <div class="center_title_bar">Recommended Products</div>
     foreach (var product in recommendedProducts)
     {
-        @await Html.PartialAsync("ProductBox", product);
+        @await Html.PartialAsync("ProductBox", product)
+        ;
     }
-} 
-
-@* *@
-@* <div class="prod_box"> *@
-@*     <div class="top_prod_box"></div> *@
-@*     <div class="center_prod_box"> *@
-@*         <div class="product_title"> *@
-@*             <a href="~/details.html">Motorola 156 MX-VL</a> *@
-@*         </div> *@
-@*         <div class="product_img"> *@
-@*             <a href="~/details.html"> *@
-@*                 <img src="~/css/images/laptop.gif" alt=""/> *@
-@*             </a> *@
-@*         </div> *@
-@*         <div class="prod_price"> *@
-@*             <span class="reduce">350$</span> <span class="price">270$</span> *@
-@*         </div> *@
-@*     </div> *@
-@*     <div class="bottom_prod_box"></div> *@
-@*     <div class="prod_details_tab"> *@
-@*         <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/cart.gif" class="left_bt" alt=""/> *@
-@*         </a> *@
-@*         <a href="#" *@
-@*            title="header=[Specials] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/favs.gif" class="left_bt" alt=""/> *@
-@*         </a> *@
-@*         <a href="#" *@
-@*            title="header=[Gifts] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/favorites.gif" class="left_bt" alt=""/> *@
-@*         </a> <a href="~/details.html" class="prod_details">details</a> *@
-@*     </div> *@
-@* </div> *@
-@* <div class="prod_box"> *@
-@*     <div class="top_prod_box"></div> *@
-@*     <div class="center_prod_box"> *@
-@*         <div class="product_title"> *@
-@*             <a href="~/details.html">Iphone Apple</a> *@
-@*         </div> *@
-@*         <div class="product_img"> *@
-@*             <a href="~/details.html"> *@
-@*                 <img src="~/css/images/p4.gif" alt=""/> *@
-@*             </a> *@
-@*         </div> *@
-@*         <div class="prod_price"> *@
-@*             <span class="price">270$</span> *@
-@*         </div> *@
-@*     </div> *@
-@*     <div class="bottom_prod_box"></div> *@
-@*     <div class="prod_details_tab"> *@
-@*         <a href="#" *@
-@*            title="header=[Add to cart] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/cart.gif" class="left_bt" alt=""/> *@
-@*         </a> *@
-@*         <a href="#" *@
-@*            title="header=[Specials] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/favs.gif" class="left_bt" alt=""/> *@
-@*         </a> *@
-@*         <a href="#" *@
-@*            title="header=[Gifts] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/favorites.gif" class="left_bt" alt=""/> *@
-@*         </a> <a href="~/details.html" class="prod_details">details</a> *@
-@*     </div> *@
-@* </div> *@
-@* <div class="prod_box"> *@
-@*     <div class="top_prod_box"></div> *@
-@*     <div class="center_prod_box"> *@
-@*         <div class="product_title"> *@
-@*             <a href="~/details.html">Samsung Webcam</a> *@
-@*         </div> *@
-@*         <div class="product_img"> *@
-@*             <a href="~/details.html"> *@
-@*                 <img src="~/css/images/p5.gif" alt=""/> *@
-@*             </a> *@
-@*         </div> *@
-@*         <div class="prod_price"> *@
-@*             <span class="reduce">350$</span> <span class="price">270$</span> *@
-@*         </div> *@
-@*     </div> *@
-@*     <div class="bottom_prod_box"></div> *@
-@*     <div class="prod_details_tab"> *@
-@*         <a href="#" *@
-@*            title="header=[Add to cart] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/cart.gif" class="left_bt" alt=""/> *@
-@*         </a> *@
-@*         <a href="#" *@
-@*            title="header=[Specials] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/favs.gif" class="left_bt" alt=""/> *@
-@*         </a> *@
-@*         <a href="#" *@
-@*            title="header=[Gifts] body=[&nbsp;] fade=[on]"> *@
-@*             <img src="~/css/images/favorites.gif" class="left_bt" alt=""/> *@
-@*         </a> <a href="~/details.html" class="prod_details">details</a> *@
-@*     </div> *@
-@* </div> *@
+}

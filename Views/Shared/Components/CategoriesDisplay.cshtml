@@ -11,13 +11,13 @@
                 if (i % 2 == 0)
                 {
                     <li class="odd">
-                        <a href="#">@categories[i].Name</a>
+                        <a asp-controller="Home" asp-action="Category" asp-route-categoryId="@categories[i].CategoryId">@categories[i].Name</a>
                     </li>
                 }
                 else
                 {
                     <li class="even">
-                        <a href="#">@categories[i].Name</a>
+                        <a asp-controller="Home" asp-action="Category" asp-route-categoryId="@categories[i].CategoryId">@categories[i].Name</a>
                     </li>
                 }
             }

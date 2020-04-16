@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace EcommerceApp2259.Contexts
 {
-    public class ProductContext : IGenericContext<Product>
+    public class ProductContext : IGenericContext<Product, Guid>
     {
         private readonly ApplicationContext _ctx;
 
@@ -29,9 +29,9 @@ namespace EcommerceApp2259.Contexts
             return productToDelete;
         }
 
-        public Product Edit(Product replicant, bool autoInsertIfNotExist = false)
+        public Product Edit(Product newCopy, bool autoInsertIfNotExist = false)
         {
-            return replicant;
+            return newCopy;
         }
 
         public Product Get(Guid uuid)

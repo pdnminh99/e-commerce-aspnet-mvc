@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EcommerceApp2259.Models
 {
@@ -12,7 +12,7 @@ namespace EcommerceApp2259.Models
         
         public string Name { get; set; }
         
-        // [JsonIgnore]
-        // public List<Product> Products { get; set; }
+        [JsonIgnore]
+        public List<Product> Products { get; set; }
     }
 }

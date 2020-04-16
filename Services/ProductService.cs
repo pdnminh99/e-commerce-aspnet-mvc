@@ -7,9 +7,9 @@ namespace EcommerceApp2259.Services
 {
     public class ProductService : IProductServiceOperations
     {
-        private readonly IGenericContext<Product> _productCtx;
+        private readonly IGenericContext<Product, Guid> _productCtx;
 
-        public ProductService(IGenericContext<Product> productCtx)
+        public ProductService(IGenericContext<Product, Guid> productCtx)
         {
             _productCtx = productCtx;
         }
