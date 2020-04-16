@@ -6,5 +6,7 @@ namespace EcommerceApp2259.Services
     public interface ICategoryServiceOperations
     {
         public List<Category> Get();
+
+        public Category Get(int categoryId);
     }
 }

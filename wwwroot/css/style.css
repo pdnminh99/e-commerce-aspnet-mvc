@@ -131,34 +131,33 @@ a.details {
 }
 /*---------------------oferta_pagination-----------------------------*/
 
-div.oferta_pagination {
+.oferta_pagination {
   clear: both;
   padding: 10px 0 0 0;
-  _padding: 0px 0 0 0;
   margin: 5px;
   text-align: center;
   float: left;
   font-size: 10px;
 }
 
-div.oferta_pagination a {
+.oferta_pagination .not-current {
   width: 22px;
   height: 22px;
   display: block;
   float: left;
   margin: 0 0 0 5px;
-  _margin: 0 0 0 3px;
   line-height: 23px;
   text-align: center;
   background: url(images/pag_bg.gif) no-repeat center;
   text-decoration: none;
   color: #9d8b8b;
 }
-div.oferta_pagination a:hover,
-div.pagination a:active {
+
+.oferta_pagination .current {
   width: 22px;
   height: 22px;
   display: block;
+  margin: 0 0 0 5px;
   float: left;
   line-height: 23px;
   text-align: center;
@@ -166,17 +165,7 @@ div.pagination a:active {
   text-decoration: none;
   color: #ad1614;
 }
-div.oferta_pagination span.current {
-  width: 22px;
-  height: 22px;
-  display: block;
-  float: left;
-  line-height: 23px;
-  text-align: center;
-  background: url(images/pag_bg_a.gif) no-repeat center;
-  text-decoration: none;
-  color: #ad1614;
-}
+
 #main_content {
   clear: both;
 }
@@ -320,7 +309,7 @@ li.currencies {
   color: #0fa0dd;
   text-decoration: underline;
 }
-span.current {
+a.current {
   color: #0fa0dd;
 }
 

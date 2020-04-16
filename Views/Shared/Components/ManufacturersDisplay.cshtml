@@ -13,7 +13,7 @@
             @foreach (var manufacturer in manufacturers)
             {
                 <li class="@itemClass">
-                    <a href="#">@manufacturer.Name</a>
+                    <a asp-controller="Home" asp-action="Brand" asp-route-brandId="@manufacturer.BrandId">@manufacturer.Name</a>
                 </li>
                 isEven = !isEven;
                 itemClass = isEven ? "even" : "odd";

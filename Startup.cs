@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,23 +22,21 @@ namespace EcommerceApp2259
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Setup DB Contexts.
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("E-CommerceContext")));
-            services.AddScoped<IGenericContext<Product>, ProductContext>();
-            services.AddScoped<IGenericContext<Brand>, BrandContext>();
-            services.AddScoped<IGenericContext<Category>, CategoryContext>();
+
+            // Setup Dependencies.
+            services.AddScoped<IGenericContext<Product, Guid>, ProductContext>();
+            services.AddScoped<IGenericContext<Brand, int>, BrandContext>();
+            services.AddScoped<IGenericContext<Category, int>, CategoryContext>();
             services.AddScoped<IProductServiceOperations, ProductService>();
             services.AddScoped<IBrandServiceOperations, BrandService>();
             services.AddScoped<ICategoryServiceOperations, CategoryService>();
+
             services.AddControllersWithViews();
-            services.AddMvc().AddJsonOptions(o =>
-            {
-                o.JsonSerializerOptions.PropertyNamingPolicy = null;
-                o.JsonSerializerOptions.DictionaryKeyPolicy = null;
-            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

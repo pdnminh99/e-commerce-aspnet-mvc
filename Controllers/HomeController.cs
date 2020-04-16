@@ -32,7 +32,7 @@ namespace EcommerceApp2259.Controllers
             var products = keyword == null ? _productService.Get() : _productService.Get(keyword);
             var brands = _brandService.Get();
             var categories = _categoryService.Get();
-            // Console.WriteLine($"Found {brands.Count} brands and {categories.Count} categories in service.");
+
             ViewData["Manufacturers"] = brands;
             ViewData["Categories"] = categories;
             ViewData["OfferedProducts"] = products;
@@ -51,14 +51,29 @@ namespace EcommerceApp2259.Controllers
             return View(product);
         }
 
-        // public IActionResult Category(string categoryId)
-        // {
-        //     if (categoryId == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return View();
-        // }
+        public IActionResult Category(int categoryId)
+        {
+            var category = _categoryService.Get(categoryId);
+            var allProducts = _productService.Get();
+
+            ViewData["Manufacturers"] = _brandService.Get();
+            ViewData["Categories"] = _categoryService.Get();
+            ViewData["OfferedProducts"] = allProducts;
+            ViewData["HeadLine"] = $"Products by category {category.Name}.";
+            return View("Index", category?.Products);
+        }
+
+        public IActionResult Brand(int brandId)
+        {
+            var brand = _brandService.Get(brandId);
+            var allProducts = _productService.Get();
+
+            ViewData["Manufacturers"] = _brandService.Get();
+            ViewData["Categories"] = _categoryService.Get();
+            ViewData["OfferedProducts"] = allProducts;
+            ViewData["HeadLine"] = $"Products by brand {brand.Name}.";
+            return View("Index", brand?.Products);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

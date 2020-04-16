@@ -5,7 +5,7 @@ using EcommerceApp2259.Models;
 
 namespace EcommerceApp2259.Contexts
 {
-    public class CategoryContext : IGenericContext<Category>
+    public class CategoryContext : IGenericContext<Category, int>
     {
         private readonly ApplicationContext _ctx;
 
@@ -13,7 +13,6 @@ namespace EcommerceApp2259.Contexts
         {
             _ctx = ctx;
             var categories =  _ctx.Category.ToList();
-            // Console.WriteLine($"Found {categories.Count} categories.");
         }
         
         public Category Add(Category item)
@@ -21,19 +20,19 @@ namespace EcommerceApp2259.Contexts
             throw new NotImplementedException();
         }
 
-        public Category Delete(Guid itemId)
+        public Category Delete(int categoryId)
         {
             throw new NotImplementedException();
         }
 
-        public Category Edit(Category replicant, bool autoInsertIfNotExist = false)
+        public Category Edit(Category newCopy, bool autoInsertIfNotExist = false)
         {
             throw new NotImplementedException();
         }
 
-        public Category Get(Guid uuid)
+        public Category Get(int categoryId)
         {
-            throw new NotImplementedException();
+            return _ctx.Category.Find(categoryId);
         }
 
         public List<Category> Get()
