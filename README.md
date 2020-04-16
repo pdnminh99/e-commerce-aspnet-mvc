@@ -7,12 +7,12 @@
 
 ## Initialize project using DotNet Core 3.1
 
-Create project from CLI.
+Create project from CLI
 
 <code> dotnet mvc -o [ProjectName] </code>
 
 ## Run application
 
-Run using the following command.
+Run using the following command
 
 <code> dotnet run </code>
