@@ -45,14 +45,25 @@
                         @if (Model.Brand != null)
                         {
                             <span>
-                                @Html.DisplayNameFor(m => m.Brand): <span class="blue">@Model.Brand.Name</span>
+                                @Html.DisplayNameFor(m => m.Brand):
+                                <a asp-controller="Home"
+                                   asp-action="Brand"
+                                   asp-route-brandId="@Model.Brand.BrandId"
+                                   class="blue" style="text-decoration: none;">
+                                    @Model.Brand.Name</a>
                             </span>
                             <br/>
                         }
                         @if (Model.Category != null)
                         {
                             <span>
-                                @Html.DisplayNameFor(m => m.Category): <span class="blue">@Model.Category.Name</span>
+                                @Html.DisplayNameFor(m => m.Category):
+                                <a asp-controller="Home"
+                                   asp-action="Category"
+                                   asp-route-categoryId="@Model.Category.CategoryId"
+                                   class="blue" 
+                                   style="text-decoration: none;">
+                                    @Model.Category.Name</a>
                             </span>
                             <br/>
                         }
