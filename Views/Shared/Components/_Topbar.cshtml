@@ -1,18 +1,32 @@
+@{
+    var searchValue = ViewData["SearchValue"] as string;
+}
+
 <div class="top_bar">
-    <div class="top_search">
-        <div class="search_text">
-            <a href="#">Advanced Search</a>
+    <form class="top_search" style="display: table" method="get" asp-controller="Home" asp-action="Products">
+        <div style="display: table-cell; padding: 0 0 0 20px;margin: 0; vertical-align: middle;">
+            Advanced Search
         </div>
-        <input type="text" class="search_input" name="search" />
-        <input type="image" src="~/css/images/search.gif" class="search_bt"  alt="search"/>
-    </div>
+        <input type="text" style="display: table-cell; vertical-align: middle; padding: 0; margin:  0;" name="keyword" value="@(searchValue ?? "")"/>
+        <button type="submit" style="padding: 0; display: table-cell; vertical-align: middle; border: none; background: transparent;" alt="search">
+            <img src="~/css/images/search.gif" alt=""/>
+        </button>
+    </form>
     <div class="languages">
         <div class="lang_text">Languages:</div>
         <a href="#" class="lang">
-            <img src="~/css/images/en.gif" />
-        </a> 
+            <img src="~/css/images/en.gif"/>
+        </a>
         <a href="#" class="lang">
-            <img src="~/css/images/de.gif" />
+            <img src="~/css/images/de.gif"/>
         </a>
     </div>
 </div>
+
+<script>
+const searchBox = document.getElementById("search-box");
+
+function getSearchKey() {
+  return `Home/Products/${searchBox.value}`;
+}
+</script>

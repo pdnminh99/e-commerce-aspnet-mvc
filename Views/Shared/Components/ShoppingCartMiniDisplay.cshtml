@@ -8,50 +8,13 @@
         <span class="border_cart"></span>Total: <span class="price" id="cart-total-price">0$</span>
     </div>
     <div class="cart_icon">
-        <a href="#" title="header=[Checkout] body=[&nbsp;] fade=[on]">
+        <a asp-controller="Customer" asp-action="Cart">
             <img src="~/css/images/shoppingcart.png" width="48" height="48" alt=""/>
         </a>
     </div>
 </div>
 
 <script type="text/javascript">
-const shoppingCart = (function () {
-    let cartString = localStorage.getItem("cart");
-    if (cartString == null) {
-        localStorage.setItem("cart", "{}");
-        return {}
-    }
-    return JSON.parse(cartString)
-})();
-
-const addProductToCart = ({ProductId, Title, Image, OriginalPrice, Category, Brand}, count) => {
-    if (count == null) {
-        count = 1;
-    }
-    let existingItem = shoppingCart[ProductId];
-    if (existingItem == null) {
-        shoppingCart[ProductId] = {ProductId, Title, Image, OriginalPrice, Category, Brand, count}
-    } else {
-        shoppingCart[ProductId].count += count;
-    }
-    if (shoppingCart[ProductId].Title !== Title) {
-        shoppingCart[ProductId].Title = Title;
-    }
-    if (shoppingCart[ProductId].Image !== Image) {
-        shoppingCart[ProductId].Image = Image;
-    }
-    if (shoppingCart[ProductId].OriginalPrice !== OriginalPrice) {
-        shoppingCart[ProductId].OriginalPrice = OriginalPrice;
-    }
-    if (shoppingCart[ProductId].Category !== Category) {
-        shoppingCart[ProductId].Category = Category;
-    }
-    if (shoppingCart[ProductId].Brand !== Brand) {
-        shoppingCart[ProductId].Brand = Brand;
-    }
-    localStorage.setItem("cart", JSON.stringify(shoppingCart))
-};
-
 const itemCountDisplayElement = document.getElementById("cart-item-count");
 const totalPriceDisplayElement = document.getElementById("cart-total-price");
 
@@ -70,10 +33,10 @@ const refreshShoppingCart = () => {
 };
 
 function addItem(json) {
-    console.log(json);
     addProductToCart(JSON.parse(json), 1);
     refreshShoppingCart();
 }
 
 refreshShoppingCart();
+
 </script>

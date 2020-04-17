@@ -10,6 +10,46 @@
 </head>
 
 <body>
+
+<script>
+const shoppingCart = (function () {
+    let cartString = localStorage.getItem("cart");
+    if (cartString == null) {
+        localStorage.setItem("cart", "{}");
+        return {}
+    }
+    return JSON.parse(cartString)
+})();
+
+const addProductToCart = ({ProductId, Title, ProductImage, OriginalPrice, Category, Brand}, count) => {
+    if (count == null) {
+        count = 1;
+    }
+    let existingItem = shoppingCart[ProductId];
+    if (existingItem == null) {
+        shoppingCart[ProductId] = {ProductId, Title, ProductImage, OriginalPrice, Category, Brand, count}
+    } else {
+        shoppingCart[ProductId].count += count;
+    }
+    if (shoppingCart[ProductId].Title !== Title) {
+        shoppingCart[ProductId].Title = Title;
+    }
+    if (shoppingCart[ProductId].ProductImage !== ProductImage) {
+        shoppingCart[ProductId].ProductImage = ProductImage;
+    }
+    if (shoppingCart[ProductId].OriginalPrice !== OriginalPrice) {
+        shoppingCart[ProductId].OriginalPrice = OriginalPrice;
+    }
+    if (shoppingCart[ProductId].Category !== Category) {
+        shoppingCart[ProductId].Category = Category;
+    }
+    if (shoppingCart[ProductId].Brand !== Brand) {
+        shoppingCart[ProductId].Brand = Brand;
+    }
+    localStorage.setItem("cart", JSON.stringify(shoppingCart))
+};
+</script>
+
 <div id="main_container">
     @await Html.PartialAsync("Components/_Topbar")
     @await Html.PartialAsync("Components/_Headerbar")
@@ -17,6 +57,7 @@
     <!-- end of main content -->
     @await Html.PartialAsync("Components/_Footer")
 </div>
+
 </body>
 
 </html>

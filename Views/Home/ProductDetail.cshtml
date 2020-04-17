@@ -1,5 +1,4 @@
-﻿@* @using Newtonsoft.Json *@
-@model EcommerceApp2259.Models.Product;
+﻿@model EcommerceApp2259.Models.Product;
 @using System.Text.Json;
 
 @{
@@ -13,18 +12,31 @@
     @await Html.PartialAsync("Components/CategoriesDisplay")
 
     <div class="center_content">
-        <div class="center_title_bar">Product</div>
+        <div class="center_title_bar">Details</div>
         <div class="prod_box_big">
             <div class="top_prod_box_big"></div>
             <div class="center_prod_box_big">
                 <div class="product_img_big">
-                    @* <a href="javascript:popImage('~/css/imagesbig_pic.jpg','Some Title')" *@
-                    @*    title="header=[Zoom] body=[&nbsp;] fade=[on]"> *@
-                    @*     <img src="~/css/images/laptop.gif"/> *@
                     @if (Model.ProductImage != null && Model.ProductImage.Count > 0)
                     {
                         <div style="height: 106px; width: 173px;">
-                            <img id="big-thumbnail" src="@Model.ProductImage[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
+                            <a href="javascript:void(0)">
+                                <img id="big-thumbnail" src="@Model.ProductImage[0].URI" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
+                            </a>
+
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal">
+
+                                <!-- The Close Button -->
+                                <span class="close">&times;</span>
+
+                                <!-- Modal Content (The Image) -->
+                                <img class="modal-content" id="img01">
+
+                                <!-- Modal Caption (Image Text) -->
+                                <div id="caption"></div>
+                            </div>
+
                         </div>
                         <div class="thumbs" style="height: 31px; margin: 0; padding: 5px 0 0;">
                             @for (int i = 1; i < Model.ProductImage.Count; i++)
@@ -41,18 +53,30 @@
                 <div class="details_big_box">
                     <div class="product_title_big">@Model.Title</div>
                     <div class="specifications">
+                        <span style="text-align: justify; line-height: 130%;">@Model.Overview</span><hr />
                         Disponibilitate: <span class="blue">In stock</span><br/>
                         @if (Model.Brand != null)
                         {
                             <span>
-                                @Html.DisplayNameFor(m => m.Brand): <span class="blue">@Model.Brand.Name</span>
+                                @Html.DisplayNameFor(m => m.Brand):
+                                <a asp-controller="Home"
+                                   asp-action="Brand"
+                                   asp-route-brandId="@Model.Brand.BrandId"
+                                   class="blue" style="text-decoration: none;">
+                                    @Model.Brand.Name</a>
                             </span>
                             <br/>
                         }
                         @if (Model.Category != null)
                         {
                             <span>
-                                @Html.DisplayNameFor(m => m.Category): <span class="blue">@Model.Category.Name</span>
+                                @Html.DisplayNameFor(m => m.Category):
+                                <a asp-controller="Home"
+                                   asp-action="Category"
+                                   asp-route-categoryId="@Model.Category.CategoryId"
+                                   class="blue"
+                                   style="text-decoration: none;">
+                                    @Model.Category.Name</a>
                             </span>
                             <br/>
                         }
@@ -77,7 +101,7 @@
                         @* <span class="reduce">350$</span>  *@
                         <span class="price">@Model.OriginalPrice$</span>
                     </div>
-                    <a class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
+                    <a href="javascript:void(0)" class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
                     <a
                         href="#" class="compare">
                         compare
@@ -100,6 +124,66 @@
     @await Html.PartialAsync("Components/RightContent")
 </div>
 
+<style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.9);
+    }
+    
+    .modal-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+    }
+    
+    #caption {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+      height: 150px;
+    }
+    
+    .modal-content, #caption {
+      animation-name: zoom;
+      animation-duration: 0.6s;
+    }
+    
+    @("@keyframes zoom { from { transform:scale(0) } to { transform:scale(1) } }")
+    
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    @("@media only screen and (max-width: 700px) { .modal-content { width: 100%; } }");
+</style>
+
 <script>
 const bigThumbnail = document.getElementById("big-thumbnail");
 
@@ -108,6 +192,27 @@ const swapThumbnail = (index) => {
     let smallThumb = document.getElementById(`small-thumb-${index}`);
     bigThumbnail.src = smallThumb.src;
     smallThumb.src = currentSrc;
+};
+
+// Modal
+const modal = document.getElementById("myModal");
+
+const img = document.getElementById("big-thumbnail");
+const modalImg = document.getElementById("img01");
+const captionText = document.getElementById("caption");
+
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+};
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
 }
 
 </script>

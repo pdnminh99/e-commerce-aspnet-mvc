@@ -1,0 +1,102 @@
+﻿<div class="center_title_bar">Cart</div>
+
+<div class="prod_box_big">
+    <div class="top_prod_box_big"></div>
+    <div id="cart-display" class="center_prod_box_big">
+    </div>
+
+    <style>
+        .card {
+        display: table;
+        width: 100%;
+        }
+        
+        .card-cell {
+        display: table-cell;
+        vertical-align: middle;
+        }
+        
+        .card-info {
+        text-align: left;
+        line-height: 150%;
+        }
+        
+    </style>
+
+    <script type="text/javascript">
+    
+    const cartDisplay = document.getElementById("cart-display");
+    var click = null;
+    
+    function removeItem(productId) {
+      document.getElementById(`item-${productId}`).remove();
+      delete shoppingCart[productId];
+      localStorage.setItem("cart", JSON.stringify(shoppingCart));
+      refreshShoppingCart();
+    }
+    
+    function changeItemCount(productId, el) {
+        if (click != null) {
+            clearInterval(click);
+        }
+        click = setTimeout(() => {
+            let newCount = Number.parseInt(el.value);
+            if (shoppingCart[productId] == null) {
+                click = null;
+                refreshShoppingCart();
+            }
+            shoppingCart[productId].count = newCount;
+            document.getElementById(`price-${productId}`).innerText = `${shoppingCart[productId].OriginalPrice * newCount}$`;
+            click = null;
+            localStorage.setItem("cart", JSON.stringify(shoppingCart));
+            refreshShoppingCart();
+        }, 500);
+    }
+    
+    const createCartItem = (index, { ProductId, Title, Category, ProductImage, Brand, OriginalPrice, count }) => {
+        let card = document.createElement("div");
+        card.id = `item-${ProductId}`;
+        card.className = "card";
+        
+        card.innerHTML = `
+                <div class="card-cell" style="width: 130px; height: 90px; padding-left: 10px; text-align: center;">
+                    <img style="max-width: 130px; max-height: 90px; vertical-align: middle;" src="${ProductImage[0].URI}" alt=""/>                
+                </div>
+                <div class="card-info" style="display: table-cell; vertical-align: middle; padding-left: 10px;">
+                    <strong>${Title}</strong>
+                    <br/>
+                    <span>Brand: ${Brand.Name}</span>
+                    <br />
+                    <span>Category: ${Category.Name}</span>
+                </div>
+                <div style="display: table-cell; vertical-align: middle;">
+                    Count
+                    <br />
+                    <input onchange="changeItemCount('${ProductId}', this)" type="number" style="width: 50px;" min="1" value="${count}"/>
+                </div>
+                <div style="display: table-cell; vertical-align: middle;">
+                    Price
+                    <br />
+                    <span id="price-${ProductId}">
+                    ${OriginalPrice}$
+                    </span>
+                </div>
+                <div onclick="removeItem('${ProductId}')" style="display: table-cell; vertical-align: middle;">
+                    <a href="javascript:void(0)">Delete</a>
+                </div>
+        `;
+        cartDisplay.appendChild(card);
+    };
+    
+    (() => {
+      let count = 0;
+      
+      for (let key of Object.keys(shoppingCart)) {
+          createCartItem(count, shoppingCart[key]);
+          count++;
+      }
+    })();
+    
+    </script>
+    <div class="bottom_prod_box_big"></div>
+</div>

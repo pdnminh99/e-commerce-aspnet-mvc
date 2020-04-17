@@ -58,7 +58,7 @@ namespace EcommerceApp2259
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{keyword?}");
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }

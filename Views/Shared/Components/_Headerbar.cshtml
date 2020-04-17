@@ -52,7 +52,7 @@
                                 }
                             }
                         </div>
-                        <a asp-action="ProductDetail" asp-route-productId="@offeredProducts[0].ProductId" class="details">details</a>
+                        <a asp-action="ProductDetail" asp-route-productId="@offeredProducts[0].ProductId" id="detail-btn" class="details">details</a>
                     </div>
                 </div>
                 @if (offeredProducts.Count > 1)
@@ -85,6 +85,7 @@
     const offerImageElement = document.getElementById("offer-image");
     const offerTitleElement = document.getElementById("offer-title");
     const offerDescription = document.getElementById("offer-description");
+    const offerDetailButton = document.getElementById("detail-btn");
 
     if (currentIndex !== maxIndex) {
 
@@ -106,6 +107,7 @@
                     overview = overview.substring(0, 220) + "...";
                 }
                 offerDescription.innerText = overview;
+                offerDetailButton.href = `/Home/ProductDetail?productId=${products[currentIndex].ProductId}`;
                 
                 currentPage = document.getElementById(`page-${currentIndex}`);
                 currentPage.className = "current";
@@ -128,6 +130,7 @@
             if (overview.length > 220) {
                 overview = `${overview.substring(0, 220)}...`;
             }
+            offerDetailButton.href = `/Home/ProductDetail?productId=${products[currentIndex].ProductId}`;
             offerDescription.innerText = overview;
             
             currentPage = document.getElementById(`page-${currentIndex}`);

@@ -15,7 +15,7 @@
 }
 else
 {
-    <h3>No products found!</h3>
+    <h1 style="text-align: center; margin-top: 50px;">This page is empty!</h1>
 }
 
 @if (recommendedProducts != null && recommendedProducts.Count > 0)
@@ -24,6 +24,5 @@ else
     foreach (var product in recommendedProducts)
     {
         @await Html.PartialAsync("ProductBox", product)
-        ;
     }
 }
