@@ -26,6 +26,7 @@
     <script type="text/javascript">
     
     const cartDisplay = document.getElementById("cart-display");
+    var click = null;
     
     function removeItem(productId) {
       document.getElementById(`item-${productId}`).remove();
@@ -34,14 +35,34 @@
       refreshShoppingCart();
     }
     
+    function changeItemCount(productId, el) {
+        if (click != null) {
+            clearInterval(click);
+        }
+        click = setTimeout(() => {
+            let newCount = Number.parseInt(el.value);
+            if (shoppingCart[productId] == null) {
+                click = null;
+                refreshShoppingCart();
+            }
+            shoppingCart[productId].count = newCount;
+            document.getElementById(`price-${productId}`).innerText = `${shoppingCart[productId].OriginalPrice * newCount}$`;
+            click = null;
+            localStorage.setItem("cart", JSON.stringify(shoppingCart));
+            refreshShoppingCart();
+        }, 500);
+    }
+    
     const createCartItem = (index, { ProductId, Title, Category, ProductImage, Brand, OriginalPrice, count }) => {
         let card = document.createElement("div");
         card.id = `item-${ProductId}`;
         card.className = "card";
         
         card.innerHTML = `
-                <img style="display: table-cell; vertical-align: middle; max-width: 200px; max-height: 150px;" src="${ProductImage[0].URI}" alt=""/>
-                <div class="card-info" style="display: table-cell; vertical-align: middle;">
+                <div class="card-cell" style="width: 130px; height: 90px; padding-left: 10px; text-align: center;">
+                    <img style="max-width: 130px; max-height: 90px; vertical-align: middle;" src="${ProductImage[0].URI}" alt=""/>                
+                </div>
+                <div class="card-info" style="display: table-cell; vertical-align: middle; padding-left: 10px;">
                     <strong>${Title}</strong>
                     <br/>
                     <span>Brand: ${Brand.Name}</span>
@@ -51,7 +72,7 @@
                 <div style="display: table-cell; vertical-align: middle;">
                     Count
                     <br />
-                    <input id="price-input-${ProductId}" type="number" style="width: 50px;" min="0" value="${count}"/>
+                    <input onchange="changeItemCount('${ProductId}', this)" type="number" style="width: 50px;" min="1" value="${count}"/>
                 </div>
                 <div style="display: table-cell; vertical-align: middle;">
                     Price
@@ -71,7 +92,6 @@
       let count = 0;
       
       for (let key of Object.keys(shoppingCart)) {
-          console.log(shoppingCart[key]);
           createCartItem(count, shoppingCart[key]);
           count++;
       }

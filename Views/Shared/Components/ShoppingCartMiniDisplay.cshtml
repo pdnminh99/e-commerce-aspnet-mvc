@@ -33,7 +33,6 @@ const refreshShoppingCart = () => {
 };
 
 function addItem(json) {
-    console.log(json);
     addProductToCart(JSON.parse(json), 1);
     refreshShoppingCart();
 }
