@@ -12,8 +12,8 @@ namespace EcommerceApp2259.Contexts
         public ProductContext(ApplicationContext ctx)
         {
             _ctx = ctx;
-            _ctx.ProductImage.ToList();
-            _ctx.ProductDetail.ToList();
+            // _ctx.ProductImage.ToList();
+            // _ctx.ProductDetail.ToList();
         }
 
         public Product Add(Product item)

@@ -12,10 +12,10 @@ namespace EcommerceApp2259.Contexts
         public BrandContext(ApplicationContext ctx)
         {
             _ctx = ctx;
-            var brands = _ctx.Brand.ToList();
+            // var brands = _ctx.Brand.ToList();
             // Console.WriteLine($"Found {brands.Count} brands.");
         }
-        
+
         public Brand Add(Brand item)
         {
             throw new NotImplementedException();

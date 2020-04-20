@@ -34,7 +34,8 @@ namespace EcommerceApp2259
             services.AddScoped<IBrandServiceOperations, BrandService>();
             services.AddScoped<ICategoryServiceOperations, CategoryService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

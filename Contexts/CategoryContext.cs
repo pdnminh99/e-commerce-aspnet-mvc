@@ -12,9 +12,9 @@ namespace EcommerceApp2259.Contexts
         public CategoryContext(ApplicationContext ctx)
         {
             _ctx = ctx;
-            var categories =  _ctx.Category.ToList();
+            // var categories =  _ctx.Category.ToList();
         }
-        
+
         public Category Add(Category item)
         {
             throw new NotImplementedException();
