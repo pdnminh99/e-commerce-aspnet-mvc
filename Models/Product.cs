@@ -17,7 +17,7 @@ namespace EcommerceApp2259.Models
         public List<ProductDetail> ProductDetail { get; set; }
 
         public string Overview { get; set; }
-        
+
         [JsonIgnore]
         public Guid? UserId { get; set; }
 

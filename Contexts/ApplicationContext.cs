@@ -19,26 +19,11 @@ namespace EcommerceApp2259.Contexts
         public DbSet<ProductDetail> ProductDetail { get; set; }
 
         public DbSet<Brand> Brand { get; set; }
-        
+
         public DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>()
-                .HasMany(p => p.ProductImage)
-                .WithOne(i => i.Product);
-
-            modelBuilder.Entity<Product>()
-                .HasMany(p => p.ProductDetail)
-                .WithOne(d => d.Product);
-
-            // modelBuilder.Entity<Category>()
-            //     .HasMany(c => c.Products)
-            //     .WithOne(p => p.Category);
-            //
-            // modelBuilder.Entity<Brand>()
-            //     .HasMany(b => b.Products)
-            //     .WithOne(p => p.Brand);
         }
     }
 }

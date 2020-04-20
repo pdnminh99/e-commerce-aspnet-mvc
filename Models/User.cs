@@ -7,7 +7,6 @@ namespace EcommerceApp2259.Models
     [Table("User")]
     public class User
     {
-        [Key]
         public Guid UserId { get; set; }
 
         [Display(Name = "Full name")]
