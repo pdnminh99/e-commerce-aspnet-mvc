@@ -49,15 +49,12 @@ namespace EcommerceApp2259.Controllers
                 .ToList();
         }
 
-        public IActionResult Index()
-        {
-            var latestProducts = _context.Product
+        public IActionResult Index() => View(
+                _context.Product
                 .Where(p => p.Stock != 0)
                 .OrderByDescending(p => p.ViewsCount)
                 .ThenByDescending(p => p.Stock)
-                .ToList();
-            return View(latestProducts);
-        }
+                .ToList());
 
         public IActionResult Products(String keyword)
         {
@@ -74,7 +71,7 @@ namespace EcommerceApp2259.Controllers
         public IActionResult ProductDetail(Guid productId)
         {
             var product = _context.Product.Find(productId);
-            if (product != null) 
+            if (product != null)
             {
                 SimilarProducts = _context.Product
                     .Where(p => p.ProductId != product.ProductId && p.Category.CategoryId == product.Category.CategoryId)
