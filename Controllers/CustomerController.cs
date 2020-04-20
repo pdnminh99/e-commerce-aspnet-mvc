@@ -22,15 +22,21 @@ namespace EcommerceApp2259.Controllers
         public CustomerController(ApplicationContext context)
         {
             _context = context;
-            Manufacturers = _context.Brand.ToList();
-            Categories = _context.Category.ToList();
-            OfferedProducts = _context.Product.ToList();
-            _context.ProductImage.ToList();
+            Manufacturers = _context.Brand
+                .OrderByDescending(b => b.Products.Count)
+                .ThenBy(b => b.Name)
+                .ToList();
+            Categories = _context.Category
+                .OrderByDescending(c => c.Products.Count)
+                .ThenBy(c => c.Name)
+                .ToList();
+            OfferedProducts = _context.Product
+                .Where(p => p.ProductImage != null && p.ProductImage.Count > 0 && p.Stock > 0)
+                .OrderByDescending(p => p.ViewsCount)
+                .Take(5)
+                .ToList();
         }
 
-        public IActionResult Cart()
-        {
-            return View();
-        }
+        public IActionResult Cart() => View();
     }
 }

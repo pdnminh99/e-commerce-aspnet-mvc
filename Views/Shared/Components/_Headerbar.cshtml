@@ -80,7 +80,7 @@
     var interval = null;
     var currentIndex = 0;
     const maxIndex = @offeredProducts.Count - 1;
-    const products = JSON.parse('@Html.Raw(JsonSerializer.Serialize(offeredProducts))');
+    const products = JSON.parse(`@Html.Raw(JsonSerializer.Serialize(offeredProducts))`);
 
     const offerImageElement = document.getElementById("offer-image");
     const offerTitleElement = document.getElementById("offer-title");

@@ -54,7 +54,28 @@
                     <div class="product_title_big">@Model.Title</div>
                     <div class="specifications">
                         <span style="text-align: justify; line-height: 130%;">@Model.Overview</span><hr />
-                        Disponibilitate: <span class="blue">In stock</span><br/>
+                        @Html.DisplayNameFor(p => p.Stock):
+                        @{
+                            if (Model.Stock > 20)
+                            {
+                                <span class="blue">
+                                    In Stock
+                                </span>
+                            }
+                            else if (Model.Stock > 0)
+                            {
+                                <span style="color: yellow;">
+                                    Almost out of Stock
+                                </span>
+                            }
+                            else
+                            {
+                                <span style="color: orangered;">
+                                    Out of Stock
+                                </span>
+                            }
+                        }
+                        <br />
                         @if (Model.Brand != null)
                         {
                             <span>
@@ -63,9 +84,10 @@
                                    asp-action="Brand"
                                    asp-route-brandId="@Model.Brand.BrandId"
                                    class="blue" style="text-decoration: none;">
-                                    @Model.Brand.Name</a>
+                                    @Model.Brand.Name
+                                </a>
                             </span>
-                            <br/>
+                            <br />
                         }
                         @if (Model.Category != null)
                         {
@@ -76,23 +98,27 @@
                                    asp-route-categoryId="@Model.Category.CategoryId"
                                    class="blue"
                                    style="text-decoration: none;">
-                                    @Model.Category.Name</a>
+                                    @Model.Category.Name
+                                </a>
                             </span>
-                            <br/>
+                            <br />
                         }
                         <span>
                             @Html.DisplayNameFor(m => m.CreatedDate): <span class="blue">@Model.CreatedDate.ToString()</span>
                         </span>
-                        <br/>
+                        <br />
                         @{
                             var productDetails = Model.ProductDetail;
                             if (productDetails != null && productDetails.Count > 0)
                             {
-                                <hr/>
+                                <hr />
                                 foreach (var detail in productDetails)
                                 {
-                                    <span>@detail.Keyword:&nbsp;@detail.Description</span>
-                                    <br/>
+                                    <span>@detail.Keyword:&nbsp;</span>
+                                    <span style="font-weight: lighter">
+                                        @detail.Description
+                                    </span>
+                                    <br />
                                 }
                             }
                         }
@@ -101,11 +127,10 @@
                         @* <span class="reduce">350$</span>  *@
                         <span class="price">@Model.OriginalPrice$</span>
                     </div>
-                    <a href="javascript:void(0)" class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
-                    <a
-                        href="#" class="compare">
-                        compare
-                    </a>
+                    @if (Model.Stock > 0)
+                    {
+                        <a href="javascript:void(0)" class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
+                    }
                 </div>
             </div>
             <div class="bottom_prod_box_big"></div>
