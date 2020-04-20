@@ -4,13 +4,18 @@ namespace EcommerceApp2259.Controllers
 {
     public class ContactUsController : Controller
     {
-        public IActionResult Index()
-        {
-            ViewData["Name"] = "Pham Do Nhat Minh";
-            ViewData["StudentId"] = 2172259;
-            ViewData["University"] = "Hoa Sen University";
-            ViewData["Class"] = "Web Developing 19.2A";
-            return View();
-        }
+        [ViewData]
+        public string Name => "Pham Do Nhat Minh";
+
+        [ViewData]
+        public int StudentId => 2172259;
+
+        [ViewData]
+        public string University => "Hoa Sen University";
+
+        [ViewData]
+        public string Class => "Web Developing 19.2A";
+
+        public IActionResult Index() => View();
     }
 }
