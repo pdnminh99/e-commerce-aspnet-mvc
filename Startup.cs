@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EcommerceApp2259.Contexts;
-using EcommerceApp2259.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceApp2259

@@ -23,6 +23,9 @@ namespace EcommerceApp2259.Controllers
         public List<Product> OfferedProducts { get; set; }
 
         [ViewData]
+        public List<Product> SimilarProducts { get; set; }
+
+        [ViewData]
         public string SearchValue { get; set; }
 
         [ViewData]
@@ -34,6 +37,7 @@ namespace EcommerceApp2259.Controllers
             Manufacturers = _context.Brand.ToList();
             Categories = _context.Category.ToList();
             OfferedProducts = _context.Product.ToList();
+            SimilarProducts = OfferedProducts;
             _context.ProductImage.ToList();
         }
 
@@ -51,7 +55,6 @@ namespace EcommerceApp2259.Controllers
 
         public IActionResult ProductDetail(Guid productId)
         {
-            ViewData["SimilarProducts"] = _context.Product.ToList();
             var product = _context.Product.Find(productId);
             if (product != null) return View(product);
             Response.StatusCode = 404;

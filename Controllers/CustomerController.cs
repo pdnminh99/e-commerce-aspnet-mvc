@@ -25,6 +25,7 @@ namespace EcommerceApp2259.Controllers
             Manufacturers = _context.Brand.ToList();
             Categories = _context.Category.ToList();
             OfferedProducts = _context.Product.ToList();
+            _context.ProductImage.ToList();
         }
 
         public IActionResult Cart()
