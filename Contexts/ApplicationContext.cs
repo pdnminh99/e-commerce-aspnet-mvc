@@ -1,8 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using EcommerceApp2259.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System;
 
 namespace EcommerceApp2259.Contexts
 {
@@ -12,15 +9,15 @@ namespace EcommerceApp2259.Contexts
         {
         }
 
-        public DbSet<Product> Product { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
 
-        public DbSet<ProductImage> ProductImage { get; set; }
+        public virtual DbSet<ProductImage> ProductImage { get; set; }
 
-        public DbSet<ProductDetail> ProductDetail { get; set; }
+        public virtual DbSet<ProductDetail> ProductDetail { get; set; }
 
-        public DbSet<Brand> Brand { get; set; }
+        public virtual DbSet<Brand> Brand { get; set; }
 
-        public DbSet<Category> Category { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

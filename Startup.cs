@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +20,7 @@ namespace EcommerceApp2259
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("E-CommerceContext")));
+                options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("E-CommerceContext")));
 
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
@@ -49,7 +48,12 @@ namespace EcommerceApp2259
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}");
+                endpoints.MapControllerRoute(
+                    name: "error",
+                    pattern: "{*url}",
+                    new { controller = "Home", action = "PageNotFound" });
             });
+
         }
     }
 }

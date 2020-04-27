@@ -10,10 +10,10 @@ namespace EcommerceApp2259.Models
     {
         [Key, Column("BrandId")]
         public int BrandId { get; set; }
-        
+
         public string Name { get; set; }
-        
+
         [JsonIgnore]
-        public List<Product> Products { get; set; }
+        public virtual List<Product> Products { get; set; }
     }
 }

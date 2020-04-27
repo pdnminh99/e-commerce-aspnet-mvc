@@ -9,10 +9,10 @@ namespace EcommerceApp2259.Models
     {
         [Key, Column("CategoryId")]
         public int CategoryId { get; set; }
-        
+
         public string Name { get; set; }
-        
+
         [JsonIgnore]
-        public List<Product> Products { get; set; }
+        public virtual List<Product> Products { get; set; }
     }
 }

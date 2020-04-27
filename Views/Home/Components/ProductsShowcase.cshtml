@@ -1,16 +1,79 @@
 @model List<EcommerceApp2259.Models.Product>;
+@using System;
 
 @{
-    var headline = ViewData["HeadLine"];
+    var headline = ViewData["HeadLine"] as string;
     var recommendedProducts = ViewData["RecommendedProducts"] as List<EcommerceApp2259.Models.Product>;
+    var pageNumber = ViewData["PageNumber"] as int?;
+    var productsCount = ViewData["ProductsCount"] as int?;
+    var productsCountPerPage = ViewData["ProductsCountPerPage"] as int?;
+    var searchValue = ViewData["SearchValue"] as string;
+    var brandId = ViewData["BrandId"] as int?;
+    var categoryId = ViewData["CategoryId"] as int?;
 }
 
-<div class="center_title_bar">@(headline ?? "Latest products.")</div>
+<div class="center_title_bar" style="display: table;">
+    <span style="display: table-cell; text-align: left;">@(headline ?? "Latest products.")</span>
+    @if (headline == null)
+    {
+        <span style="display: table-cell; text-align: right; padding-right: 20px;">
+            <a asp-controller="Home" asp-action="Products" style="text-decoration: none;">More</a>
+        </span>
+    }
+</div>
 @if (Model != null && Model.Count > 0)
 {
     foreach (var product in Model)
     {
         @await Html.PartialAsync("Components/ProductBox", product)
+    }
+    
+    if (productsCount != null && productsCountPerPage != null && productsCount > productsCountPerPage)
+    {
+        double temp = productsCount * 1.0 / productsCountPerPage ?? 0.0;
+        var maxPage = Math.Ceiling(temp);
+
+        <div class="oferta_pagination" style="display: table;">
+            @for (var page = 0; page < maxPage; page++)
+            {
+                if (categoryId == null && brandId == null)
+                {
+                    <a 
+                    asp-controller="Home"
+                    asp-action="Products"
+                    asp-route-keyword="@(searchValue)"
+                    asp-route-page="@(page)"
+                    style="display: table-cell" 
+                    class="@(pageNumber == page ? "current" : "not-current")">
+                    @(page + 1)
+                    </a>
+                }
+                else if (categoryId == null)
+                {
+                    <a 
+                    asp-controller="Home"
+                    asp-action="Brand"
+                    asp-route-brandId="@brandId"
+                    asp-route-page="@(page)"
+                    style="display: table-cell" 
+                    class="@(pageNumber == page ? "current" : "not-current")">
+                    @(page + 1)
+                    </a>
+                }
+                else
+                {
+                    <a 
+                    asp-controller="Home"
+                    asp-action="Category"
+                    asp-route-categoryId="@categoryId"
+                    asp-route-page="@(page)"
+                    style="display: table-cell" 
+                    class="@(pageNumber == page ? "current" : "not-current")">
+                    @(page + 1)
+                    </a>
+                }
+            }
+        </div>
     }
 }
 else
@@ -20,9 +83,14 @@ else
 
 @if (recommendedProducts != null && recommendedProducts.Count > 0)
 {
-    <div class="center_title_bar">Recommended Products</div>
+    <div class="center_title_bar"  style="display: table;">
+        <span style="display: table-cell; text-align: left;">Recommended Products</span>
+        <span style="display: table-cell; text-align: right; padding-right: 20px;">
+            <a asp-controller="Home" asp-action="Products" style="text-decoration: none;">More</a>
+        </span>
+    </div>
     foreach (var product in recommendedProducts)
     {
-        @await Html.PartialAsync("ProductBox", product)
+        @await Html.PartialAsync("Components/ProductBox", product)
     }
 }

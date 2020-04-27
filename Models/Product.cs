@@ -12,9 +12,10 @@ namespace EcommerceApp2259.Models
 
         [Display(Name = "Product name")] public string Title { get; set; }
 
-        public List<ProductImage> ProductImage { get; set; }
+        public virtual List<ProductImage> ProductImage { get; set; }
 
-        public List<ProductDetail> ProductDetail { get; set; }
+        [JsonIgnore]
+        public virtual List<ProductDetail> ProductDetail { get; set; }
 
         public string Overview { get; set; }
 
@@ -24,13 +25,19 @@ namespace EcommerceApp2259.Models
         [Column("Price"), Display(Name = "Price")]
         public int OriginalPrice { get; set; }
 
-        [DataType(DataType.DateTime), Display(Name = "Created datetime")]
+        [DataType(DataType.DateTime), Display(Name = "Created datetime"), JsonIgnore]
         public DateTime CreatedDate { get; }
 
         [Column("Category"), Display(Name = "Category")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         [Column("Brand"), Display(Name = "Brand")]
-        public Brand Brand { get; set; }
+        public virtual Brand Brand { get; set; }
+
+        [Display(Name = "Stock status"), JsonIgnore]
+        public int Stock { get; set; }
+
+        [JsonIgnore]
+        public int ViewsCount { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace EcommerceApp2259.Models
         public String URI { get; set; }
 
         [JsonIgnore]
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
