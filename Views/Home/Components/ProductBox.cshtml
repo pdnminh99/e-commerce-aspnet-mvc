@@ -42,21 +42,3 @@
         <a asp-action="ProductDetail" asp-route-productId="@Model.ProductId" class="prod_details">details</a>
     </div>
 </div>
-
-@if (Model.ProductImage != null && Model.ProductImage.Count > 1)
-{
-    <script>
-    const imageElementOfProduct@(Model.ProductId.ToString().Replace("-", "")) = document.getElementById("product-img-@Model.ProductId");
-    const imagesOfProduct@(Model.ProductId.ToString().Replace("-", "")) = JSON.parse('@Html.Raw(JsonSerializer.Serialize(Model.ProductImage))');
-    const maxImageOfProduct@(Model.ProductId.ToString().Replace("-", "")) = imagesOfProduct@(Model.ProductId.ToString().Replace("-", "")).length - 1;
-    var currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", "")) = 0;
-    
-    setInterval(() => {
-        currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", "")) += 1;
-        if (currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", "")) > maxImageOfProduct@(Model.ProductId.ToString().Replace("-", ""))) {
-            currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", "")) = 0;
-        }
-        imageElementOfProduct@(Model.ProductId.ToString().Replace("-", "")).src = imagesOfProduct@(Model.ProductId.ToString().Replace("-", ""))[currentIndexOfProduct@(Model.ProductId.ToString().Replace("-", ""))].URI;
-    }, 3000);
-    </script>
-}

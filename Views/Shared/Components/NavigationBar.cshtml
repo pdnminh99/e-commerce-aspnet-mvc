@@ -1,3 +1,8 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 <div id="menu_tab">
     <div class="left_menu_corner"></div>
     <ul class="menu">
@@ -13,13 +18,18 @@
             <a href="#" class="nav3">Specials</a>
         </li>
         <li class="divider"></li>
-        <li>
-            <a href="#" class="nav4">My account</a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="#" class="nav4">Sign Up</a>
-        </li>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li>
+                <a href="#" class="nav4">My account</a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a class="nav4" asp-controller="Customer" asp-action="SignIn">Sign Up</a>
+            </li>
+        }
         <li class="divider"></li>
         <li>
             <a href="#" class="nav5">Shipping</a>

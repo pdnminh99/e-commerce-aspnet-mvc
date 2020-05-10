@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using EcommerceApp2259.Models;
-using EcommerceApp2259.Contexts;
+// using EcommerceApp2259.Contexts;
+using EcommerceApp2259.Areas.Identity.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace EcommerceApp2259.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ApplicationContext _context;
+        private readonly EcommerceApp2259IdentityDbContext _context;
 
         private readonly IConfiguration _config;
 
@@ -45,7 +46,7 @@ namespace EcommerceApp2259.Controllers
         [ViewData]
         public List<Product> RecommendedProducts { get; set; }
 
-        public HomeController(ApplicationContext context, IConfiguration configuration)
+        public HomeController(EcommerceApp2259IdentityDbContext context, IConfiguration configuration)
         {
             _context = context;
             _config = configuration;

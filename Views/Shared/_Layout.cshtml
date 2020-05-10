@@ -51,11 +51,10 @@ const addProductToCart = ({ProductId, Title, ProductImage, OriginalPrice, Catego
 </script>
 
 <div id="main_container">
-    @await Html.PartialAsync("Components/_Topbar")
-    @await Html.PartialAsync("Components/_Headerbar")
+    <partial name="Components/_Topbar" />
+    <partial name="Components/_Headerbar" />
     @RenderBody()
-    <!-- end of main content -->
-    @await Html.PartialAsync("Components/_Footer")
+    <partial name="Components/_Footer" />
 </div>
 
 </body>

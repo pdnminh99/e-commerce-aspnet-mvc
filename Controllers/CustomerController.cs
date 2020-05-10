@@ -1,14 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using EcommerceApp2259.Models;
-using EcommerceApp2259.Contexts;
+// using EcommerceApp2259.Contexts;
+using EcommerceApp2259.Areas.Identity.Data;
 using System.Collections.Generic;
 
 namespace EcommerceApp2259.Controllers
 {
     public class CustomerController : Controller
     {
-        private readonly ApplicationContext _context;
+        private readonly EcommerceApp2259IdentityDbContext _context;
 
         [ViewData]
         public List<Brand> Manufacturers { get; set; }
@@ -19,7 +20,7 @@ namespace EcommerceApp2259.Controllers
         [ViewData]
         public List<Product> OfferedProducts { get; set; }
 
-        public CustomerController(ApplicationContext context)
+        public CustomerController(EcommerceApp2259IdentityDbContext context)
         {
             _context = context;
             Manufacturers = _context.Brand
@@ -38,5 +39,10 @@ namespace EcommerceApp2259.Controllers
         }
 
         public IActionResult Cart() => View();
+
+
+        public IActionResult SignIn() {
+            return View();
+        }
     }
 }
