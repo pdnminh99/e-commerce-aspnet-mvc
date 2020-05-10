@@ -182,7 +182,7 @@ namespace EcommerceApp2259.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    ProductId = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false, defaultValue: Guid.NewGuid().ToString()),
                     Title = table.Column<string>(nullable: true),
                     Overview = table.Column<string>(nullable: true),
                     UserId = table.Column<Guid>(nullable: true),
