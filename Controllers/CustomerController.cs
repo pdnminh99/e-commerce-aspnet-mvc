@@ -4,6 +4,8 @@ using EcommerceApp2259.Models;
 // using EcommerceApp2259.Contexts;
 using EcommerceApp2259.Areas.Identity.Data;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EcommerceApp2259.Controllers
 {
@@ -41,6 +43,7 @@ namespace EcommerceApp2259.Controllers
         public IActionResult Cart() => View();
 
 
+        [AllowAnonymous]
         public IActionResult SignIn() {
             return View();
         }

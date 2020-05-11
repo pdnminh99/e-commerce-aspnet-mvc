@@ -26,7 +26,7 @@ namespace EcommerceApp2259.Models
         public int OriginalPrice { get; set; }
 
         [DataType(DataType.DateTime), Display(Name = "Created datetime"), JsonIgnore]
-        public DateTime CreatedDate { get; }
+        public DateTime CreatedDate { get; set; }
 
         [Column("Category"), Display(Name = "Category")]
         public virtual Category Category { get; set; }

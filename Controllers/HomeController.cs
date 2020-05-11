@@ -7,9 +7,11 @@ using EcommerceApp2259.Areas.Identity.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EcommerceApp2259.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly EcommerceApp2259IdentityDbContext _context;
@@ -44,7 +46,7 @@ namespace EcommerceApp2259.Controllers
         public int ProductsCount { get; set; }
 
         [ViewData]
-        public List<Product> RecommendedProducts { get; set; }
+        public List<Product> MostViewsProducts { get; set; }
 
         public HomeController(EcommerceApp2259IdentityDbContext context, IConfiguration configuration)
         {
@@ -68,15 +70,17 @@ namespace EcommerceApp2259.Controllers
 
         public IActionResult Index()
         {
-            var queryable = _context.Product
+            MostViewsProducts = _context
+                .Product
                 .Where(p => p.Stock != 0)
                 .OrderByDescending(p => p.ViewsCount)
-                .ThenByDescending(p => p.Stock);
-            RecommendedProducts = queryable
-                .Skip(3)
                 .Take(3)
                 .ToList();
-            return View(queryable.Take(3).ToList());
+            return View(
+                _context.Product
+                    .OrderByDescending(p => p.CreatedDate)
+                    .Take(3)
+                    .ToList());
         }
 
         public IActionResult Products(String keyword, int page = 0)
@@ -114,6 +118,7 @@ namespace EcommerceApp2259.Controllers
             {
                 SimilarProducts = _context.Product
                     .Where(p => p.ProductId != product.ProductId && p.Category.CategoryId == product.Category.CategoryId)
+                    .OrderByDescending(p => p.ViewsCount)
                     .Take(3)
                     .ToList();
                 product.ViewsCount += 1;

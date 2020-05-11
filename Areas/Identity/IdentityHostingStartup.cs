@@ -14,7 +14,7 @@ namespace EcommerceApp2259.Areas.Identity
         {
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<EcommerceApp2259IdentityDbContext>(options =>
-                    options.UseSqlServer(
+                    options.UseLazyLoadingProxies().UseSqlServer(
                         context.Configuration.GetConnectionString("EcommerceApp2259IdentityDbContextConnection")));
 
                 services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
