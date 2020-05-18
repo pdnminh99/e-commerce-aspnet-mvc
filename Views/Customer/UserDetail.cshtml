@@ -1,0 +1,24 @@
+
+
+<div id="main_content">
+    @await Html.PartialAsync("Components/NavigationBar")
+    <!-- end of menu tab -->
+    <div class="crumb_navigation">Navigation: User Detail</div>
+    @await Html.PartialAsync("Components/CategoriesDisplay")
+    <!-- end of left content -->
+    <div class="center_content">
+        <div class="center_title_bar">User Detail</div>
+
+        <div class="prod_box_big">
+            <div class="top_prod_box_big"></div>
+
+            <div class="center_prod_box_big">
+                Hello
+            </div>
+            <div class="bottom_prod_box_big"></div>
+        </div>
+
+    </div>
+    <!-- end of center content -->
+    @await Html.PartialAsync("Components/RightContent")
+</div>

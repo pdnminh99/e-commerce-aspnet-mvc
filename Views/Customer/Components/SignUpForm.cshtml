@@ -1,0 +1,54 @@
+@using Microsoft.AspNetCore.Identity;
+@model RegisterViewModel
+@inject SignInManager<IdentityUser> SignInManager
+
+<form style="display: table-cell; text-align: left; border-left: 1px solid grey; padding-left: 10px;" method="POST" asp-controller="Customer" asp-action="Register">
+    <h2>Sign Up</h2>
+
+    <div class="form-part">
+        <label for="email-signup" asp-for="Email">Email</label>
+        <input id="email-signup" type="email" asp-for="Email"/>
+    </div>
+    
+    <br />
+
+    <div class="form-part">
+        <label for="phone-signup" asp-for="PhoneNumber"></label>
+        <input id="phone-singup" type="tel" asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        <label for="password-signup" asp-for="Password"></label>
+        <input id="password-signup" type="password" asp-for="Password" />
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signup', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        <label for="password-signup-reenter" asp-for="ConfirmPassword"></label>
+        <input id="password-signup-reenter" type="password" asp-action="ConfirmPassword" />
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signup-reenter', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        <label for="address-signup">Address</label>
+        <input id="address-signup" type="text" name="text" />
+    </div>
+
+
+    <br />
+
+    <button type="submit" alt="search">
+        Sign up
+    </button>
+</form>

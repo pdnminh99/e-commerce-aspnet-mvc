@@ -63,6 +63,9 @@ namespace EcommerceApp2259.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("OriginalPrice")
                         .HasColumnName("Price")
                         .HasColumnType("int");

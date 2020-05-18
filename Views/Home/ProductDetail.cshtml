@@ -132,17 +132,39 @@
                             if (productDetails != null)
                             {
                                 <div id="description-table">
-                                    <table style="border: 1px solid black; border-collapse: collapse;">
+                                    <table class="tbl">
                                     @foreach (var productDetail in productDetails)
                                     {
                                         <tr>
-                                            <td style="border: 1px solid black;">@productDetail.Keyword</td>
-                                            <td style="font-weight: lighter; border: 1px solid black;">
+                                            <td class="tbl-header">@productDetail.Keyword</td>
+                                            <td class="tbl-value">
                                                 @productDetail.Description
                                             </td>
                                         </tr>
                                     }
                                     </table>
+
+                                    <style>
+                                        .tbl {
+                                            border: 1px solid black; 
+                                            border-collapse: collapse;
+                                        }
+
+
+                                        .tbl-header {
+                                            border: 1px solid black;
+                                        }
+
+                                        .tbl-value {
+                                            font-weight: lighter; 
+                                            border: 1px solid black;
+                                        }
+                                    </style>
+
+                                    <script>
+                                        // TODO add more here.
+                                    </script>
+
                                 </div>
                             }
                         }

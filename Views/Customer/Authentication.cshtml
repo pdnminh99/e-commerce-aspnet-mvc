@@ -1,0 +1,66 @@
+<div id="main_content">
+    @await Html.PartialAsync("Components/NavigationBar")
+    <!-- end of menu tab -->
+    <div class="crumb_navigation">Navigation: Sign In</div>
+    @await Html.PartialAsync("Components/CategoriesDisplay")
+    <!-- end of left content -->
+    <div class="center_content">
+        <div class="center_title_bar">Sign up / Sign in</div>
+
+        <div class="prod_box_big">
+            <div class="top_prod_box_big"></div>
+
+            <div class="center_prod_box_big" style="display: table">
+                <partial name="Components/SignInForm"></partial>
+                <partial name="Components/SignUpForm"></partial>
+            </div>
+            <div class="bottom_prod_box_big"></div>
+        </div>
+
+    <style>
+        .form-part {
+            margin: 5px 0;
+        }
+
+        .form-part label {
+            display: block;
+            width: 100%;
+            margin: 1px 0;
+        }
+
+        .show-hide-passw {
+            background: transparent;
+            border: none;
+        }
+    </style>
+
+    <script>
+        function createEyeButton(isClose) {
+            let i = document.createElement("i");
+            i.classList = "fa " + (isClose ? "fa-eye-slash" : "fa-eye");
+            console.log(i.classList)
+            return i;
+        }
+
+        function toggleShowHidePassword(textboxId, eyeBtn) {
+            if (typeof textboxId !== "string" || textboxId.trim().length === 0) {
+                return;
+            }
+            let el = document.getElementById(textboxId);
+            while(eyeBtn.firstChild) {
+                eyeBtn.removeChild(eyeBtn.firstChild);
+            }
+            if (el.type == "password") {
+                el.type = "text";
+                eyeBtn.append(createEyeButton(false));
+            } else {
+                el.type = "password";
+                eyeBtn.append(createEyeButton(true));
+            }
+        }
+    </script>
+
+    </div>
+    <!-- end of center content -->
+    @await Html.PartialAsync("Components/RightContent")
+</div>

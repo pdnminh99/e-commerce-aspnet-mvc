@@ -182,15 +182,16 @@ namespace EcommerceApp2259.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    ProductId = table.Column<Guid>(nullable: false, defaultValue: Guid.NewGuid().ToString()),
+                    ProductId = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Overview = table.Column<string>(nullable: true),
                     UserId = table.Column<Guid>(nullable: true),
                     Price = table.Column<int>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
                     CategoryId = table.Column<int>(nullable: true),
                     BrandId = table.Column<int>(nullable: true),
                     Stock = table.Column<int>(nullable: false),
-                    ViewsCount = table.Column<int>(nullable: false, defaultValue: 0)
+                    ViewsCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -21,13 +21,17 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <li>
-                <a href="#" class="nav4">My account</a>
+                <a class="nav4" asp-controller="Customer" asp-action="UserDetail">My account</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a class="nav4" asp-controller="Customer" asp-action="SignOut">Sign out</a>
             </li>
         }
         else
         {
             <li>
-                <a class="nav4" asp-controller="Customer" asp-action="SignIn">Sign Up / Sign In</a>
+                <a class="nav4" asp-controller="Customer" asp-action="Authentication">Sign Up / Sign In</a>
             </li>
         }
         <li class="divider"></li>

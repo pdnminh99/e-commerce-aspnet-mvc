@@ -1,125 +1,30 @@
-<div class="center_title_bar">Sign in</div>
+@using Microsoft.AspNetCore.Identity;
+@model LoginViewModel
+@inject SignInManager<IdentityUser> SignInManager
 
-<div class="prod_box_big">
-    <div class="top_prod_box_big"></div>
-
-    <div class="center_prod_box_big" style="display: table">
-        <form style="display: table-cell; text-align: left; padding-left: 20px;" method="post" asp-controller="Customer" asp-action="SignIn">
-            <h2>Sign In</h2>
+<form style="display: table-cell; text-align: left; padding-left: 20px;" method="post" asp-controller="Customer" asp-action="SignIn">
+    <h2>Sign In</h2>
             
-            <div class="form-part">
-                <label for="phone-signin">Mobile Phone</label>
-                <input id="phone-signin" type="tel" name="phone" />
-            </div>
-
-            <br />
-
-            <div class="form-part">
-                <label for="password-signin">Password</label>
-                <input id="password-signin" style="margin: 0;" type="password" name="password" />
-                <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signin', this)">
-                    <i class="fa fa-eye"></i>
-                </button>
-            </div>
-
-            <br />
-
-            <button type="submit" alt="search">
-                Sign in
-            </button>
-        </form>
-
-        <form style="display: table-cell; text-align: left; border-left: 1px solid grey; padding-left: 10px;" method="POST" asp-controller="Customer" asp-action="SignUp">
-            <h2>Sign Up</h2>
-
-            <div class="form-part">
-                <label for="phone-signup">Mobile Phone</label>
-                <input id="phone-singup" type="tel" name="phone" />
-            </div>
-
-            <br />
-
-            <div class="form-part">
-                <label for="password-signup">Password</label>
-                <input id="password-signup" type="password" name="password" />
-                <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signup', this)">
-                    <i class="fa fa-eye"></i>
-                </button>
-            </div>
-
-            <br />
-
-            <div class="form-part">
-                <label for="password-signup-reenter">Re-enter Password</label>
-                <input id="password-signup-reenter" type="password" name="password" />
-                <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signup-reenter', this)">
-                    <i class="fa fa-eye"></i>
-                </button>
-            </div>
-
-            <br />
-
-            <div class="form-part">
-                <label for="address-signup">Address</label>
-                <input id="address-signup" type="text" name="text" />
-            </div>
-
-            <br />
-
-            <div class="form-part">
-                <label for="email-signup">Email</label>
-                <input id="email-signup" type="email" name="email" />
-            </div>
-
-            <br />
-
-            <button type="submit" alt="search">
-                Sign up
-            </button>
-        </form>
+    <div class="form-part">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" />
+        <span asp-validation-for="Email"></span>
     </div>
-    <div class="bottom_prod_box_big"></div>
-</div>
 
-<style>
-    .form-part {
-        margin: 5px 0;
-    }
+    <br />
 
-    .form-part label {
-        display: block;
-        width: 100%;
-        margin: 1px 0;
-    }
+    <div class="form-part">
+        <label for="password-signin" asp-for="Password"></label>
+        <input asp-for="Password" id="password-signin" style="margin: 0;" type="password" />
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signin', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+        <span asp-validation-for="Password"></span>
+    </div>
 
-    .show-hide-passw {
-        background: transparent;
-        border: none;
-    }
-</style>
+    <br />
 
-<script>
-    function createEyeButton(isClose) {
-        let i = document.createElement("i");
-        i.classList = "fa " + (isClose ? "fa-eye-slash" : "fa-eye");
-        console.log(i.classList)
-        return i;
-    }
-
-    function toggleShowHidePassword(textboxId, eyeBtn) {
-        if (typeof textboxId !== "string" || textboxId.trim().length === 0) {
-            return;
-        }
-        let el = document.getElementById(textboxId);
-        while(eyeBtn.firstChild) {
-            eyeBtn.removeChild(eyeBtn.firstChild);
-        }
-        if (el.type == "password") {
-            el.type = "text";
-            eyeBtn.append(createEyeButton(false));
-        } else {
-            el.type = "password";
-            eyeBtn.append(createEyeButton(true));
-        }
-    }
-</script>
+    <button type="submit" alt="search">
+        Sign in
+    </button>
+</form>
