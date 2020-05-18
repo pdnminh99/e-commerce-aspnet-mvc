@@ -39,7 +39,8 @@ namespace EcommerceApp2259.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Address = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,7 +53,7 @@ namespace EcommerceApp2259.Migrations
                 {
                     BrandId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,11 +66,25 @@ namespace EcommerceApp2259.Migrations
                 {
                     CategoryId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.CategoryId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Promotion",
+                columns: table => new
+                {
+                    PromotionId = table.Column<Guid>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    SaleOffPercentages = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Promotion", x => x.PromotionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,12 +200,12 @@ namespace EcommerceApp2259.Migrations
                     ProductId = table.Column<Guid>(nullable: false),
                     Title = table.Column<string>(nullable: true),
                     Overview = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: true),
                     Price = table.Column<int>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     CategoryId = table.Column<int>(nullable: true),
                     BrandId = table.Column<int>(nullable: true),
                     Stock = table.Column<int>(nullable: false),
+                    PromotionId = table.Column<Guid>(nullable: true),
                     ViewsCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -207,6 +222,12 @@ namespace EcommerceApp2259.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Product_Promotion_PromotionId",
+                        column: x => x.PromotionId,
+                        principalTable: "Promotion",
+                        principalColumn: "PromotionId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -301,6 +322,11 @@ namespace EcommerceApp2259.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Product_PromotionId",
+                table: "Product",
+                column: "PromotionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductDetail_ProductId",
                 table: "ProductDetail",
                 column: "ProductId");
@@ -348,6 +374,9 @@ namespace EcommerceApp2259.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Promotion");
         }
     }
 }

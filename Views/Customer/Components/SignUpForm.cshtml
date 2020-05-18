@@ -1,6 +1,6 @@
 @using Microsoft.AspNetCore.Identity;
 @model RegisterViewModel
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<User> SignInManager
 
 <form style="display: table-cell; text-align: left; border-left: 1px solid grey; padding-left: 10px;" method="POST" asp-controller="Customer" asp-action="Register">
     <h2>Sign Up</h2>
@@ -41,8 +41,9 @@
     <br />
 
     <div class="form-part">
-        <label for="address-signup">Address</label>
-        <input id="address-signup" type="text" name="text" />
+        <label for="address-signup" asp-for="Address">Address</label>
+        <input id="address-signup" type="text" asp-for="Address" />
+        <span asp-validation-for="Address"></span>
     </div>
 
 

@@ -1,21 +1,21 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using System;
 
 namespace EcommerceApp2259.Models
 {
-    [Table("ProductDetail")]
-    public class ProductDetail
+    public class Promotion
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductDetailId { get; set; }
-
-        public string Keyword { get; set; }
+        public Guid PromotionId { get; set; }
 
         public string Description { get; set; }
 
-        [JsonIgnore]
-        public virtual Product Product { get; set; }
+#nullable enable
+        public string? Title { get; set; }
+
+        public int? SaleOffPercentages { get; set; }
+#nullable disable
     }
 }

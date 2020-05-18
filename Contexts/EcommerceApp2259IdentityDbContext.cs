@@ -1,11 +1,10 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using EcommerceApp2259.Models;
 
-namespace EcommerceApp2259.Areas.Identity.Data
+namespace EcommerceApp2259.Contexts
 {
-    public class EcommerceApp2259IdentityDbContext : IdentityDbContext<IdentityUser>
+    public class EcommerceApp2259IdentityDbContext : IdentityDbContext<User>
     {
         public virtual DbSet<Product> Product { get; set; }
 
@@ -16,6 +15,10 @@ namespace EcommerceApp2259.Areas.Identity.Data
         public virtual DbSet<Brand> Brand { get; set; }
 
         public virtual DbSet<Category> Category { get; set; }
+
+        public virtual DbSet<Promotion> Promotion { get; set; }
+
+        public virtual DbSet<User> User { get; set; }
 
         public EcommerceApp2259IdentityDbContext(DbContextOptions<EcommerceApp2259IdentityDbContext> options)
             : base(options)

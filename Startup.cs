@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-// using EcommerceApp2259.Contexts;
-// using Microsoft.EntityFrameworkCore;
-using EcommerceApp2259.Areas.Identity.Data;
+using EcommerceApp2259.Models;
+using EcommerceApp2259.Contexts;
 using Microsoft.AspNetCore.Identity;
 using System;
 
+using Microsoft.EntityFrameworkCore;
+
+// [assembly: HostingStartup(typeof(EcommerceApp2259.Startup))]
 namespace EcommerceApp2259
 {
     public class Startup
@@ -30,6 +32,13 @@ namespace EcommerceApp2259
 
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
+
+
+            services.AddDbContext<EcommerceApp2259IdentityDbContext>(options =>
+                    options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("EcommerceApp2259IdentityDbContextConnection")));
+
+            services.AddDefaultIdentity<User>()
+                .AddEntityFrameworkStores<EcommerceApp2259IdentityDbContext>();
 
             services.Configure<IdentityOptions>(options =>
             {

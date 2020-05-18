@@ -1,6 +1,6 @@
 @using Microsoft.AspNetCore.Identity;
 @model LoginViewModel
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<User> SignInManager
 
 <form style="display: table-cell; text-align: left; padding-left: 20px;" method="post" asp-controller="Customer" asp-action="SignIn">
     <h2>Sign In</h2>

@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using EcommerceApp2259.Models;
-// using EcommerceApp2259.Contexts;
-using EcommerceApp2259.Areas.Identity.Data;
+using EcommerceApp2259.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

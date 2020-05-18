@@ -8,6 +8,8 @@ namespace EcommerceApp2259.Models
 {
     public class Product
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ProductId { get; set; }
 
         [Display(Name = "Product name")] public string Title { get; set; }
@@ -18,9 +20,6 @@ namespace EcommerceApp2259.Models
         public virtual List<ProductDetail> ProductDetail { get; set; }
 
         public string Overview { get; set; }
-
-        [JsonIgnore]
-        public Guid? UserId { get; set; }
 
         [Column("Price"), Display(Name = "Price")]
         public int OriginalPrice { get; set; }
@@ -36,6 +35,12 @@ namespace EcommerceApp2259.Models
 
         [Display(Name = "Stock status"), JsonIgnore]
         public int Stock { get; set; }
+
+#nullable enable
+        [Column("Promotion"), Display(Name = "Promotion")]
+        public virtual Promotion? Promotion { get; set; }
+
+#nullable disable
 
         [JsonIgnore]
         public int ViewsCount { get; set; }

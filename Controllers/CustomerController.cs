@@ -1,14 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using EcommerceApp2259.Models;
-using System;
-// using EcommerceApp2259.Contexts;
-using EcommerceApp2259.Areas.Identity.Data;
+using EcommerceApp2259.Contexts;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
-
 
 namespace EcommerceApp2259.Controllers
 {
@@ -16,9 +13,9 @@ namespace EcommerceApp2259.Controllers
     {
         private readonly EcommerceApp2259IdentityDbContext _context;
 
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<User> _signInManager;
 
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
         [ViewData]
         public List<Brand> Manufacturers { get; set; }
@@ -30,8 +27,8 @@ namespace EcommerceApp2259.Controllers
         public List<Product> OfferedProducts { get; set; }
 
         public CustomerController(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager,
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
             EcommerceApp2259IdentityDbContext context)
         {
             _context = context;
@@ -52,10 +49,18 @@ namespace EcommerceApp2259.Controllers
                 .ToList();
         }
 
+        [AllowAnonymous]
         public IActionResult Cart() => View();
 
-        public IActionResult UserDetail()
+        [Authorize]
+        public async Task<IActionResult> UserDetail()
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                return RedirectToAction("Authentication");
+            }
             return View();
         }
 
@@ -63,18 +68,15 @@ namespace EcommerceApp2259.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var newUser = new IdentityUser()
+            var newUser = new User()
             {
                 UserName = model.Email,
                 Email = model.Email,
+                Address = model.Address
             };
             var registerResult = await _userManager.CreateAsync(newUser, model.Password);
             if (registerResult.Succeeded)
             {
-            //     var code = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-            //     var callbackUrl = Url.EmailConfirmationLink(newUser.Id, code, Request.Scheme);
-            //     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
                 await _signInManager.SignInAsync(user: newUser, isPersistent: false);
                 return RedirectToAction("UserDetail");
             }
@@ -107,7 +109,7 @@ namespace EcommerceApp2259.Controllers
         public async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("SignIn");
+            return RedirectToAction("Authentication");
         }
     }
 }

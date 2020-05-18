@@ -8,7 +8,9 @@ namespace EcommerceApp2259.Models
     [Table("ProductImage")]
     public class ProductImage
     {
-        [Key] public int ImageId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ImageId { get; set; }
 
         public String URI { get; set; }
 

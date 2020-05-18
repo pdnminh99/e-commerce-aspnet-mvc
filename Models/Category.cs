@@ -7,9 +7,12 @@ namespace EcommerceApp2259.Models
 {
     public class Category
     {
-        [Key, Column("CategoryId")]
+        [Key]
+        [Column("CategoryId")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CategoryId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         [JsonIgnore]
