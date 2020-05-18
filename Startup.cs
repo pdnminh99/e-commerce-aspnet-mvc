@@ -38,7 +38,8 @@ namespace EcommerceApp2259
                     options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("EcommerceApp2259IdentityDbContextConnection")));
 
             services.AddDefaultIdentity<User>()
-                .AddEntityFrameworkStores<EcommerceApp2259IdentityDbContext>();
+                .AddEntityFrameworkStores<EcommerceApp2259IdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -68,11 +69,10 @@ namespace EcommerceApp2259
             {
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
 
-                // options.LoginPath = "/Identity/Account/Login";
-                options.LoginPath = "/Customer/SignIn";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = "/Customer/Authentication";
+                // options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
         }

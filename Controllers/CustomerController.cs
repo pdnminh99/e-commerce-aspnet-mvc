@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System;
 using EcommerceApp2259.Models;
 using EcommerceApp2259.Contexts;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace EcommerceApp2259.Controllers
         private readonly SignInManager<User> _signInManager;
 
         private readonly UserManager<User> _userManager;
+
+        [ViewData]
+        public string ErrorMessage { get; set; }
 
         [ViewData]
         public List<Brand> Manufacturers { get; set; }
@@ -61,7 +65,7 @@ namespace EcommerceApp2259.Controllers
             {
                 return RedirectToAction("Authentication");
             }
-            return View();
+            return View(user);
         }
 
         [AllowAnonymous]
@@ -72,20 +76,29 @@ namespace EcommerceApp2259.Controllers
             {
                 UserName = model.Email,
                 Email = model.Email,
-                Address = model.Address
+                Address = model.Address ?? "",
+                PhoneNumber = model.PhoneNumber,
             };
-            var registerResult = await _userManager.CreateAsync(newUser, model.Password);
+            IdentityResult registerResult = await _userManager.CreateAsync(newUser, model.Password);
+
             if (registerResult.Succeeded)
             {
                 await _signInManager.SignInAsync(user: newUser, isPersistent: false);
                 return RedirectToAction("UserDetail");
             }
+            ErrorMessage = "Invalid information";
             return RedirectToAction("Authentication");
         }
 
         [AllowAnonymous]
-        public IActionResult Authentication()
+        public async Task<IActionResult> Authentication()
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                return RedirectToAction("UserDetail");
+            }
             return View();
         }
 
@@ -93,6 +106,7 @@ namespace EcommerceApp2259.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(LoginViewModel model)
         {
+            // Console.WriteLine(model.RememberMe);
             var loginResult = await _signInManager.PasswordSignInAsync(
                 userName: model.Email,
                 password: model.Password,
@@ -103,6 +117,7 @@ namespace EcommerceApp2259.Controllers
             {
                 return RedirectToAction("UserDetail");
             }
+            ErrorMessage = "Invalid information";
             return RedirectToAction("Authentication");
         }
 

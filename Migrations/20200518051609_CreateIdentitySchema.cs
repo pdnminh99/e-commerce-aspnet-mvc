@@ -77,7 +77,7 @@ namespace EcommerceApp2259.Migrations
                 name: "Promotion",
                 columns: table => new
                 {
-                    PromotionId = table.Column<Guid>(nullable: false),
+                    PromotionId = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
                     Description = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     SaleOffPercentages = table.Column<int>(nullable: true)
@@ -197,11 +197,11 @@ namespace EcommerceApp2259.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    ProductId = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
                     Title = table.Column<string>(nullable: true),
                     Overview = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     CategoryId = table.Column<int>(nullable: true),
                     BrandId = table.Column<int>(nullable: true),
                     Stock = table.Column<int>(nullable: false),

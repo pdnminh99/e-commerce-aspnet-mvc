@@ -1,11 +1,20 @@
+@{
+    string errorMessage = ViewData["ErrorMessage"] as string;
+}
+
 <div id="main_content">
     @await Html.PartialAsync("Components/NavigationBar")
     <!-- end of menu tab -->
     <div class="crumb_navigation">Navigation: Sign In</div>
-    @await Html.PartialAsync("Components/CategoriesDisplay")
+    <partial name="Components/CategoriesDisplay"></partial>
     <!-- end of left content -->
     <div class="center_content">
         <div class="center_title_bar">Sign up / Sign in</div>
+
+        @if (errorMessage != null && errorMessage.Length > 0)
+        {
+            <div class="center_title_bar" style="background-color: red; color: #FFF;">@errorMessage</div>
+        }
 
         <div class="prod_box_big">
             <div class="top_prod_box_big"></div>
@@ -62,5 +71,5 @@
 
     </div>
     <!-- end of center content -->
-    @await Html.PartialAsync("Components/RightContent")
+    <partial name="Components/RightContent"></partial>
 </div>

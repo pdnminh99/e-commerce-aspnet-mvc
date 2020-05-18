@@ -1,4 +1,4 @@
-
+@model EcommerceApp2259.Models.User
 
 <div id="main_content">
     @await Html.PartialAsync("Components/NavigationBar")
@@ -13,7 +13,13 @@
             <div class="top_prod_box_big"></div>
 
             <div class="center_prod_box_big">
-                Hello
+                @Html.DisplayNameFor(m => m.Email): @Model.Email
+                <br />
+                @Html.DisplayNameFor(m => m.Address): @Model.Address
+                <br />
+                @Html.DisplayNameFor(m => m.Id): @Model.Id
+                <br />
+                Password: @Model.PasswordHash
             </div>
             <div class="bottom_prod_box_big"></div>
         </div>
