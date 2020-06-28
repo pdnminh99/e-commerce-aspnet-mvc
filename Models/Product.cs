@@ -36,12 +36,6 @@ namespace EcommerceApp2259.Models
         [Display(Name = "Stock status"), JsonIgnore]
         public int Stock { get; set; }
 
-#nullable enable
-        [Column("Promotion"), Display(Name = "Promotion")]
-        public virtual Promotion? Promotion { get; set; }
-
-#nullable disable
-
         [JsonIgnore]
         public int ViewsCount { get; set; }
     }

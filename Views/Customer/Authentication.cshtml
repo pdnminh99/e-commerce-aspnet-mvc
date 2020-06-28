@@ -11,15 +11,11 @@
     <div class="center_content">
         <div class="center_title_bar">Sign up / Sign in</div>
 
-        @if (errorMessage != null && errorMessage.Length > 0)
-        {
-            <div class="center_title_bar" style="background-color: red; color: #FFF;">@errorMessage</div>
-        }
-
         <div class="prod_box_big">
             <div class="top_prod_box_big"></div>
 
             <div class="center_prod_box_big" style="display: table">
+                <h3 style="color: red;">@(errorMessage ?? "")</h3>
                 <partial name="Components/SignInForm"></partial>
                 <partial name="Components/SignUpForm"></partial>
             </div>
@@ -68,6 +64,10 @@
             }
         }
     </script>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>  
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
     </div>
     <!-- end of center content -->

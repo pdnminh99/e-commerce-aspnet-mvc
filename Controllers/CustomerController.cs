@@ -70,7 +70,7 @@ namespace EcommerceApp2259.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
+        public async Task<IActionResult> Authentication(RegisterViewModel model)
         {
             var newUser = new User()
             {
@@ -78,16 +78,22 @@ namespace EcommerceApp2259.Controllers
                 Email = model.Email,
                 Address = model.Address ?? "",
                 PhoneNumber = model.PhoneNumber,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                DateOfBirth = model.DateOfBirth
             };
             IdentityResult registerResult = await _userManager.CreateAsync(newUser, model.Password);
+            Console.WriteLine(registerResult.ToString());
 
             if (registerResult.Succeeded)
             {
                 await _signInManager.SignInAsync(user: newUser, isPersistent: false);
-                return RedirectToAction("UserDetail");
+                RedirectToAction("UserDetail");
             }
-            ErrorMessage = "Invalid information";
-            return RedirectToAction("Authentication");
+            ModelState.AddModelError("DuplicateEmail", "Email already exists.");
+            // Console.WriteLine("Error");
+            return View();
+            // return RedirectToAction("Authentication");
         }
 
         [AllowAnonymous]

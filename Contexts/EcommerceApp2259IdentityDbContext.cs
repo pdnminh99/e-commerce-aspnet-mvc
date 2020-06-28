@@ -16,8 +16,6 @@ namespace EcommerceApp2259.Contexts
 
         public virtual DbSet<Category> Category { get; set; }
 
-        public virtual DbSet<Promotion> Promotion { get; set; }
-
         public virtual DbSet<User> User { get; set; }
 
         public EcommerceApp2259IdentityDbContext(DbContextOptions<EcommerceApp2259IdentityDbContext> options)
@@ -37,9 +35,9 @@ namespace EcommerceApp2259.Contexts
                 .Property(p => p.ProductId)
                 .HasDefaultValueSql("NEWID()");
 
-            builder.Entity<Promotion>()
-                .Property(p => p.PromotionId)
-                .HasDefaultValueSql("NEWID()");
+            // builder.Entity<Promotion>()
+            //     .Property(p => p.PromotionId)
+            //     .HasDefaultValueSql("NEWID()");
         }
     }
 }
