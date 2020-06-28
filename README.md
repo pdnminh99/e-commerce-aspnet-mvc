@@ -1,18 +1,10 @@
 
-# Sample E-Commerce Shopping Application
+# Use Migration
 
-- Name: Pham Do Nhat Minh
-- StudentId: 217 2259
-- Semester: 19.2A
+`dotnet ef migration remove`
 
-## Initialize project using DotNet Core 3.1
+`dotnet ef migration add CreateIdentitySchema`
 
-Create project from CLI
+`dotnet ef database drop`
 
-<code> dotnet mvc -o [ProjectName] </code>
-
-## Run application
-
-Run using the following command
-
-<code> dotnet run </code>
+`dotnet ef database update`
