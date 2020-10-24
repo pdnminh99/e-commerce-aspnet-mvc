@@ -1,5 +1,6 @@
 ﻿@model EcommerceApp2259.Models.Product;
 @using System.Text.Json;
+@using System.Globalization;
 
 @{
     var similarProducts = ViewData["SimilarProducts"] as List<Product>;
@@ -8,7 +9,7 @@
 <div id="main_container">
     @await Html.PartialAsync("Components/NavigationBar")
     <!-- end of menu tab -->
-    <div class="crumb_navigation">Navigation:<a class="current" asp-controller="Home" asp-action="Index">Home</a></div>
+    <div class="crumb_navigation">Navigation: Product > @Model.Title</a></div>
     @await Html.PartialAsync("Components/CategoriesDisplay")
 
     <div class="center_content">
@@ -49,6 +50,24 @@
                             }
                         </div>
                     }
+                    else
+                    {
+                        <div style="height: 106px; width: 173px;">
+                            <a href="javascript:void(0)">
+                                <img id="big-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" alt="@Model.Title" style="max-width: 173px; max-height: 104px;"/>
+                            </a>
+                        </div>
+                    }
+                    <div class="prod_price_big">
+                        @* <span class="reduce">350$</span>  *@
+                        <span class="price">@Model.OriginalPrice$</span>
+                    </div>
+                    @if (Model.Stock > 0)
+                        {
+                            <span>
+                                <a href="javascript:void(0)" class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
+                            </span>
+                        }
                 </div>
                 <div class="details_big_box">
                     <div class="product_title_big">@Model.Title</div>
@@ -58,19 +77,19 @@
                         @{
                             if (Model.Stock > 20)
                             {
-                                <span class="blue">
+                                <span style="border-radius: 5px; padding: 1px 2px; background: #ABD7EB; color: black;">
                                     In Stock
                                 </span>
                             }
                             else if (Model.Stock > 0)
                             {
-                                <span style="color: yellow;">
+                                <span style="border-radius: 10px; padding: 1px 2px; background: yellow; color: black;">
                                     Almost out of Stock
                                 </span>
                             }
                             else
                             {
-                                <span style="color: orangered;">
+                                <span style="border-radius: 10px; padding: 1px 2px; background: orangered; color: white;">
                                     Out of Stock
                                 </span>
                             }
@@ -104,33 +123,53 @@
                             <br />
                         }
                         <span>
-                            @Html.DisplayNameFor(m => m.CreatedDate): <span class="blue">@Model.CreatedDate.ToString()</span>
+                            @Html.DisplayNameFor(m => m.CreatedDate): <span class="blue">@Model.CreatedDate.ToString("D", CultureInfo.CreateSpecificCulture("en-US"))</span>
                         </span>
                         <br />
                         @{
                             var productDetails = Model.ProductDetail;
-                            if (productDetails != null && productDetails.Count > 0)
+
+                            if (productDetails != null)
                             {
-                                <hr />
-                                foreach (var detail in productDetails)
-                                {
-                                    <span>@detail.Keyword:&nbsp;</span>
-                                    <span style="font-weight: lighter">
-                                        @detail.Description
-                                    </span>
-                                    <br />
-                                }
+                                <div id="description-table">
+                                    <table class="tbl">
+                                    @foreach (var productDetail in productDetails)
+                                    {
+                                        <tr>
+                                            <td class="tbl-header">@productDetail.Keyword</td>
+                                            <td class="tbl-value">
+                                                @productDetail.Description
+                                            </td>
+                                        </tr>
+                                    }
+                                    </table>
+
+                                    <style>
+                                        .tbl {
+                                            border: 1px solid black; 
+                                            border-collapse: collapse;
+                                        }
+
+
+                                        .tbl-header {
+                                            border: 1px solid black;
+                                        }
+
+                                        .tbl-value {
+                                            font-weight: lighter; 
+                                            border: 1px solid black;
+                                        }
+                                    </style>
+
+                                    <script>
+                                        // TODO add more here.
+                                    </script>
+
+                                </div>
                             }
                         }
                     </div>
-                    <div class="prod_price_big">
-                        @* <span class="reduce">350$</span>  *@
-                        <span class="price">@Model.OriginalPrice$</span>
-                    </div>
-                    @if (Model.Stock > 0)
-                    {
-                        <a href="javascript:void(0)" class="addtocart" onclick="addItem('@JsonSerializer.Serialize(Model)')">add to cart</a>
-                    }
+                    
                 </div>
             </div>
             <div class="bottom_prod_box_big"></div>
@@ -150,6 +189,12 @@
 </div>
 
 <style>
+    #description-table {
+        max-height: 400px; 
+        overflow-y: auto;
+        margin-top: 10px;
+    }
+
     .modal {
       display: none;
       position: fixed;

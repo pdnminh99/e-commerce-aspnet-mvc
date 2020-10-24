@@ -1,0 +1,80 @@
+@using Microsoft.AspNetCore.Identity;
+@model LoginViewModel
+
+@using (Html.BeginForm(
+    actionName: "SignIn",
+    controllerName: "Customer",
+    method: FormMethod.Post,
+    htmlAttributes: new { @class = "signInForm"}
+))
+{
+    <h2>Sign In</h2>
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.Email)
+        @Html.EditorFor(m => m.Email)
+        <br />
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @id = "password-signin", @style = "margin: 0" })
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signin', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+        <br />
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.RememberMe) @Html.CheckBoxFor(m => m.RememberMe)
+    </div>
+
+    <button type="submit" alt="search">
+        Sign in
+    </button>
+}
+
+@* <form style="display: table-cell; text-align: left; padding-left: 20px;" method="post" asp-controller="Customer" asp-action="SignIn">
+    <h2>Sign In</h2>
+            
+    <div class="form-part">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        <label for="password-signin" asp-for="Password"></label>
+        <input asp-for="Password" id="password-signin" style="margin: 0;" type="password" />
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signin', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div class="form-part">
+        @Html.DisplayNameFor(m => m.RememberMe) @Html.CheckBoxFor(m => m.RememberMe)
+    </div>
+
+    <br />
+
+    <button type="submit" alt="search">
+        Sign in
+    </button>
+</form> *@
+
+<style>
+    .signInForm {
+        display: table-cell; 
+        text-align: left; 
+        padding-left: 20px;
+    }
+</style>

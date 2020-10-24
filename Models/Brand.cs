@@ -8,9 +8,12 @@ namespace EcommerceApp2259.Models
     [Table("Brand")]
     public class Brand
     {
-        [Key, Column("BrandId")]
+        [Key]
+        [Column("BrandId")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BrandId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         [JsonIgnore]

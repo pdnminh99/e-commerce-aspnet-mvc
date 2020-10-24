@@ -1,0 +1,157 @@
+@model EcommerceApp2259.Models.RegisterViewModel
+
+@using (Html.BeginForm(
+    actionName: "Authentication",
+    controllerName: "Customer",
+    method: FormMethod.Post,
+    htmlAttributes: new { @class = "signUpForm"}
+))
+{
+    @* @Html.ValidationSummary(true, ""); *@
+    <h2>Sign Up</h2>
+
+    @Html.ValidationMessage("DuplicateEmail")
+    <div class="form-part">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName)
+        <br />
+        @* <span asp-validation-for="FirstName"></span> *@
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName)
+        <br />
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.DateOfBirth)
+        @Html.EditorFor(m => m.DateOfBirth)
+        <br />
+        @Html.ValidationMessageFor(m => m.DateOfBirth)
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        <br />
+        @Html.ValidationMessageFor(m => m.Email,"")
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber)
+        <br />
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @id="password-signup" })
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signup', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+        <br />
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @id="password-signup-reenter" })
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signup-reenter', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+        <br />
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address)
+        <br />
+        @Html.ValidationMessageFor(m => m.Address)
+    </div>
+
+    <br />
+
+    <button type="submit" alt="search">
+        Sign up
+    </button>
+}
+
+@* <form style="display: table-cell; text-align: left; border-left: 1px solid grey; padding-left: 10px;" method="POST" asp-controller="Customer" asp-action="Register">
+    <h2>Sign Up</h2>
+
+    <div class="form-part">
+        <label for="email-signup" asp-for="Email">Email</label>
+        <input id="email-signup" type="email" asp-for="Email"/>
+    </div>
+    
+    <br />
+
+    <div class="form-part">
+        <label for="phone-signup" asp-for="PhoneNumber"></label>
+        <input id="phone-singup" type="tel" asp-for="PhoneNumber" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        <label for="password-signup" asp-for="Password"></label>
+        <input id="password-signup" type="password" asp-for="Password" />
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signup', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        <label for="password-signup-reenter" asp-for="ConfirmPassword"></label>
+        <input id="password-signup-reenter" type="password" asp-action="ConfirmPassword" />
+        <button class="show-hide-passw" type="button" onclick="toggleShowHidePassword('password-signup-reenter', this)">
+            <i class="fa fa-eye"></i>
+        </button>
+    </div>
+
+    <br />
+
+    <div class="form-part">
+        <label for="address-signup" asp-for="Address">Address</label>
+        <input id="address-signup" type="text" asp-for="Address" />
+        <span asp-validation-for="Address"></span>
+    </div>
+
+
+    <br />
+
+    <button type="submit" alt="search">
+        Sign up
+    </button>
+</form> *@
+
+<style>
+    .signUpForm {
+        display: table-cell; 
+        text-align: left; 
+        border-left: 1px solid grey; 
+        padding-left: 10px;
+    }
+</style>

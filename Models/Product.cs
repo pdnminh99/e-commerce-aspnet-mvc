@@ -8,6 +8,8 @@ namespace EcommerceApp2259.Models
 {
     public class Product
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ProductId { get; set; }
 
         [Display(Name = "Product name")] public string Title { get; set; }
@@ -19,14 +21,11 @@ namespace EcommerceApp2259.Models
 
         public string Overview { get; set; }
 
-        [JsonIgnore]
-        public Guid? UserId { get; set; }
-
         [Column("Price"), Display(Name = "Price")]
         public int OriginalPrice { get; set; }
 
         [DataType(DataType.DateTime), Display(Name = "Created datetime"), JsonIgnore]
-        public DateTime CreatedDate { get; }
+        public DateTime CreatedDate { get; set; }
 
         [Column("Category"), Display(Name = "Category")]
         public virtual Category Category { get; set; }

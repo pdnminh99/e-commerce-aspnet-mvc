@@ -3,7 +3,7 @@
 
 @{
     var headline = ViewData["HeadLine"] as string;
-    var recommendedProducts = ViewData["RecommendedProducts"] as List<EcommerceApp2259.Models.Product>;
+    var mostViewsProducts = ViewData["MostViewsProducts"] as List<EcommerceApp2259.Models.Product>;
     var pageNumber = ViewData["PageNumber"] as int?;
     var productsCount = ViewData["ProductsCount"] as int?;
     var productsCountPerPage = ViewData["ProductsCountPerPage"] as int?;
@@ -81,15 +81,15 @@ else
     <h1 style="text-align: center; margin-top: 50px;">This page is empty!</h1>
 }
 
-@if (recommendedProducts != null && recommendedProducts.Count > 0)
+@if (mostViewsProducts != null && mostViewsProducts.Count > 0)
 {
     <div class="center_title_bar"  style="display: table;">
-        <span style="display: table-cell; text-align: left;">Recommended Products</span>
+        <span style="display: table-cell; text-align: left;">Popular Products</span>
         <span style="display: table-cell; text-align: right; padding-right: 20px;">
             <a asp-controller="Home" asp-action="Products" style="text-decoration: none;">More</a>
         </span>
     </div>
-    foreach (var product in recommendedProducts)
+    foreach (var product in mostViewsProducts)
     {
         @await Html.PartialAsync("Components/ProductBox", product)
     }

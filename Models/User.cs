@@ -1,40 +1,33 @@
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EcommerceApp2259.Models
 {
-    [Table("User")]
-    public class User
+    public class User : IdentityUser
     {
-        public Guid UserId { get; set; }
+        [Display(Name = "Date of birth")]
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
 
-        [Display(Name = "Full name")]
-        public string Name { get; set; }
+        [Display(Name = "First name")]
+        [Required]
+        [DataType(DataType.Text)]
+        [MinLength(1, ErrorMessage = "Invalid first name")]
+        [MaxLength(100)]
+        public string FirstName { get; set; }
 
-        [Column("UserType")]
-        private string _Type
-        {
-            set
-            {
-                Type = value switch
-                {
-                    "customer" => UserType.Customer,
-                    "admin" => UserType.Admin,
-                    _ => UserType.Unknown
-                };
-            }
-        }
+        [Display(Name = "Last name")]
+        [Required]
+        [DataType(DataType.Text)]
+        [MinLength(1, ErrorMessage = "Invalid last name")]
+        [MaxLength(100)]
+        public string LastName { get; set; }
 
-        [NotMapped]
-        public UserType Type { get; set; }
-
-        public string Phone { get; set; }
-
-        public string Email { get; set; }
-
-        [DataType(DataType.DateTime)]
-        public DateTime CreatedDate { get; set; }
+        [Display(Name = "Address")]
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        public string Address { get; set; }
     }
-
 }
